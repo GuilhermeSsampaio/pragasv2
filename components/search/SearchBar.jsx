@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+// import FetchApiOffline from "../../localDatabase/FetchApiOffline"; 
 
 export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
