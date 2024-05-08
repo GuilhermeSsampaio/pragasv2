@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Logo from '../../public/logo.svg'
+import Logo from '../../public/logo.png'
 import TextCapitulos from './TextCapitulos.jsx'
 import { SearchBar } from "../search/SearchBar.jsx";
 import { SearchResultsList } from "../search/SearchResultsList.jsx";
@@ -258,7 +258,7 @@ export const Capitulos = () => {
                         <ul className="navbar-nav ms-auto d-flex itens-menu-cap">
                             <li className="nav-item mx-3">
                                 <Link className="nav-link back-item-link py-2" href="/sumario" aria-current="page">
-                                    <span className="link-text">Edição Completa</span>
+                                    <span className="link-text">Sumário</span>
                                 </Link> 
                             </li>
                             <li className="nav-item mx-3">
@@ -279,13 +279,13 @@ export const Capitulos = () => {
                         </button>
                         {/* Logo Navbar */}
                         <Link className="navbar-brand" href="/home">
-                            <Image src={Logo} width="100%" height={26} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
+                            <Image src={Logo} width={160} height={35} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
                         </Link>
                         {/* Código dos Itens Exibidos no Navbar */}
                         <ul className="navbar-nav ms-auto d-flex flex-row">
                             <li className="nav-item text-item-link">
                                 <Link className="nav-link back-item-link" href="/sumario" aria-current="page">
-                                    <span className="link-text">Edição Completa</span>
+                                    <span className="link-text">Sumário</span>
                                 </Link> 
                             </li>
                             <li className="nav-item text-item-link">

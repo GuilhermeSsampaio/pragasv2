@@ -16,7 +16,7 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleT
           >
             <div className="d-flex justify-content-between align-items-center">
               <div>
-                <h5 className="mb-0">{item.attributes.title}</h5>
+                <h6 className="mb-0">{item.attributes.title}</h6>
                 {item.attributes.subtitle && (
                   <span className="subtitle font-size-lg">{item.attributes.subtitle}</span>
                 )}

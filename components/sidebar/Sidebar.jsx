@@ -91,7 +91,7 @@ const Sidebar = ({ data }) => {
                 <ul className="navbar-nav ms-auto d-flex itens-menu-cap">
                     <li className="nav-item mx-3">
                         <Link className="nav-link back-item-link py-2" href="/sumario" aria-current="page">
-                            <span className="link-text">Edição Completa</span>
+                            <span className="link-text">Sumário</span>
                         </Link>
                     </li>
                     <li className="nav-item mx-3">

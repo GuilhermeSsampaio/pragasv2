@@ -201,7 +201,7 @@ hr {
     background-size: cover;
     display: flex;
     flex-direction: column;
-    height: 600px;
+    height: 685px;
     justify-content: center;
     padding: 4rem 2rem;
     position: relative;
@@ -589,7 +589,6 @@ footer .container-footer {
 
 @media screen and (min-width: 992px) and (max-width: 1060px) {
     .nav-item .nav-link {
-      font-size: 14px !important;
       margin-right: 0 !important;
     }
 }

@@ -25,7 +25,7 @@ export default function Navbar () {
                         </button>
                         {/* Logo Navbar */}
                         <Link className="navbar-brand" href="/home">
-                            <Image src={Logo} width="100%" height={40} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
+                            <Image src={Logo} width={200} height={40} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
                         </Link>
                     </div>
                     {/* Input Search para tela menor que 992px */}
