@@ -90,7 +90,7 @@ const Sidebar = ({ data }) => {
                 <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={toggleSummaryAndMainMenu}>← Voltar para o Sumário</button>
                 <ul className="navbar-nav ms-auto d-flex itens-menu-cap">
                     <li className="nav-item mx-3">
-                        <Link className="nav-link back-item-link py-2" href="/edicao-completa" aria-current="page">
+                        <Link className="nav-link back-item-link py-2" href="/sumario" aria-current="page">
                             <span className="link-text">Edição Completa</span>
                         </Link>
                     </li>

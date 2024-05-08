@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Capitulos } from './Capitulos';
 import TextCapitulos from './TextCapitulos';
+
 const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleTitleClick, setContentId , handleSubitemContent}) => {
   const [clickedItemId, setClickedItemId] = useState(null);
 
@@ -9,19 +10,21 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleT
       {data.map((item, chapterIndex) => (
         <div key={item.id}>
           <a
-            className={`list-group-item py-2 ${expandedItems.includes(item.id) ? 'active' : ''}`}
+            className={`list-group-item list-group-item-action py-2 ${expandedItems.includes(item.id) ? 'active' : ''}`}
             onClick={() => toggleItem(item.id)}
-            style={{
-              cursor: 'pointer',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+            style={{ cursor: 'pointer' }}
           >
-            {item.attributes.title}
-            {' '}
-            <i className={`fas fa-chevron-${expandedItems.includes(item.id) ? 'down' : 'right'} icon-deg`} style={{ fontSize: '15px' }}></i>
+            <div className="d-flex justify-content-between align-items-center">
+              <div>
+                <h5 className="mb-0">{item.attributes.title}</h5>
+                {item.attributes.subtitle && (
+                  <span className="subtitle font-size-lg">{item.attributes.subtitle}</span>
+                )}
+              </div>
+              <i className={`fas fa-chevron-${expandedItems.includes(item.id) ? 'down' : 'right'} ml-2`} style={{ fontSize: '15px' }}></i>
+            </div>
           </a>
+
           {expandedItems.includes(item.id) && (
             <ul className="list-group list-group-flush mx-2 py-1">
               {item.attributes.conteudo.map((conteudoItem, index) => (
@@ -46,6 +49,7 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleT
           )}
         </div>
       ))}
+
       {clickedItemId !== null && (
         <div className="clicked-item-content">
           {data.map((item) => (

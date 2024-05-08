@@ -48,6 +48,7 @@ export const Capitulos = () => {
     // }
 
     const loadContent = (index, chapterIndex) => {
+        setClickedSectionId(0);
         const content = data[chapterIndex].attributes.conteudo[index];
         setClickedSectionId(content.id);
         console.log(`id clicado: ${content.id} titulo: ${content.titulo_secao}`);
@@ -176,7 +177,7 @@ export const Capitulos = () => {
               setActiveTitle(data[0].id);
         
               // Use useRouter para navegar para o capítulo ativo
-              router.push(`/edicao-completa?activeChapter=${data[0].id}`, undefined, { shallow: true });
+              router.push(`/sumario?activeChapter=${data[0].id}`, undefined, { shallow: true });
             }
           }
         scrollToTop();
@@ -256,7 +257,7 @@ export const Capitulos = () => {
                         <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={toggleSummaryAndMainMenu}>← Voltar para o Sumário</button>
                         <ul className="navbar-nav ms-auto d-flex itens-menu-cap">
                             <li className="nav-item mx-3">
-                                <Link className="nav-link back-item-link py-2" href="/edicao-completa" aria-current="page">
+                                <Link className="nav-link back-item-link py-2" href="/sumario" aria-current="page">
                                     <span className="link-text">Edição Completa</span>
                                 </Link> 
                             </li>
@@ -283,7 +284,7 @@ export const Capitulos = () => {
                         {/* Código dos Itens Exibidos no Navbar */}
                         <ul className="navbar-nav ms-auto d-flex flex-row">
                             <li className="nav-item text-item-link">
-                                <Link className="nav-link back-item-link" href="/edicao-completa" aria-current="page">
+                                <Link className="nav-link back-item-link" href="/sumario" aria-current="page">
                                     <span className="link-text">Edição Completa</span>
                                 </Link> 
                             </li>
@@ -352,7 +353,7 @@ export const Capitulos = () => {
                             <section className="home-section right-sidebar" style={{marginTop: 30}}>
                                 {/* Código dos Textos da Cartilha */}
                                 <div id="contents" className="bd-content ps-lg-2">
-                                    <TextCapitulos lista = {data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} contentID={clickedSectionId} />
+                                    <TextCapitulos lista = {data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} contentId={clickedSectionId} />
                                     {/* {console.log('idtext-a', clickedSectionId)} */}
                                 </div>
                             </section>

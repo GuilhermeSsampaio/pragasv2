@@ -39,7 +39,7 @@ export const HomePage = () => {
                     <div className="col-lg-6 mx-auto">
                         <p className="lead mb-4">4<sup>a</sup> edição atualizada</p>
                         <div className="d-grid container-botoes">
-                            <Link href="/edicao-completa" type="button" className="btn">
+                            <Link href="/sumario" type="button" className="btn">
                                 Descubra mais sobre Pragas na Soja
                             </Link>
                             {/* <a id='btn-instalar' href="#" className='btn'>Instalar</a> */}
