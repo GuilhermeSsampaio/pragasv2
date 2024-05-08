@@ -27,7 +27,6 @@ export const HomePage = () => {
                 <meta name="referrer" referrerPolicy="no-referrer" />
                 <title>Manual Pragas</title>
             </Head>
-            {/* Código Navbar Offcanvas */}
             
 
             {/* Conteúdos da Página Principal */}
