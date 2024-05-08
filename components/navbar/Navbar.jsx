@@ -54,7 +54,7 @@ export default function Navbar () {
                         <div className="offcanvas-body">
                             <ul className="navbar-nav justify-content-end flex-grow-1 center-itens">
                                 <li className="nav-item">
-                                    <Link className="nav-link back-item-link" href="/sumario" aria-current="page">
+                                    <Link className="nav-link back-item-link" href="/edicao-completa" aria-current="page">
                                         <span className="link-text">Sumário</span>
                                     </Link>     
                                 </li>
