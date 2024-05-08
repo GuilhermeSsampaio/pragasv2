@@ -25,7 +25,7 @@ async function FetchApiOffline(apiUrl, dbName, storeName, keyPath, isShowMsg) {
                 const response = await toast.promise(fetch(apiUrl),
                     {
                         pending: `Carregando ${storeName} online...`,
-                        success: `Os ${storeName} foram atualizados com sucesso!`,
+                        success: `Os registros de ${storeName} foram atualizados com sucesso!`,
                         error: `Erro ao carregar os ${storeName} online.`
                     });
                 if (response.ok) {
