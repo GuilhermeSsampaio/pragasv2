@@ -170,10 +170,6 @@ hr {
 .nav-item a:hover {
   color: #3578e5;
 }
-
-.rounded-pill {
-  margin-top: -3px;
-}
 /* Fim Estilo Navbar */
 
 /* Estilo do Conteúdo da Cartilha */
@@ -502,9 +498,6 @@ hr {
   }
   .pagination-nav__link {
     margin-right: 20px !important;
-  }
-  .rounded-pill {
-    margin-top: -14px !important;
   }
 }
 

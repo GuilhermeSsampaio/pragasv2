@@ -105,7 +105,6 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3px;
 }
 
 .results-list {
@@ -517,15 +516,6 @@ footer .container-footer {
     /* Estilo Autores Card */
     .container-cards .card {
         width: 28%;
-    }
-}
-
-@media screen and (min-width: 992px) and (max-width: 1129px) {
-    #searchForm {
-        margin-top: 8px;
-    }
-    .hide-form-search2 {
-        margin-top: 5px !important;
     }
 }
 
