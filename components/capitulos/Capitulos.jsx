@@ -1,19 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Logo from '../../public/logo.png'
 import TextCapitulos from './TextCapitulos.jsx'
-import { SearchBar } from "../search/SearchBar.jsx";
-import { SearchResultsList } from "../search/SearchResultsList.jsx";
 import FetchApiOffline from '../../localDatabase/FetchApiOffline.jsx';
-import SumarioDropdown from './SumarioDropDown.jsx'
-
+import Sidebar from '../sidebar/Sidebar.jsx'
 export const Capitulos = () => {
     //Importação das Imagens
-    var LogoIF = require('../../public/ifms-dr-marca-2015.png');
-    var LogoEmbrapa = require('../../public/logo-embrapa-400.png');
+
     var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
 
     const router = useRouter();
@@ -37,15 +31,6 @@ export const Capitulos = () => {
         let chapter = +e.target.dataset.chapterIndex;
         loadContent(index, chapter);
     }
-
-    // const handleSubitemContent = (e, sectionId) => {
-    //     e.preventDefault();
-        
-    //     let index =+e.target.dataset.conteudoIndex;
-    //     let chapter = +e.target.dataset.chapterIndex;
-    //     loadContent(index, chapter);
-    //     // setClickedSectionId(sectionId);
-    // }
 
     const loadContent = (index, chapterIndex) => {
         setClickedSectionId(0);
@@ -204,126 +189,20 @@ export const Capitulos = () => {
             {/* Div que Pega todo o Conteúdo da Página */}
             <div className="container-wrapper">
                 {/* Código Sidebar */}
-                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white thin-scrollbar ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
-                    <div className="position-sticky">
-                        <div id="summary" className="list-group list-group-flush mt-2 py-2 menu_SIkG" style={{ display: showSummary ? 'block' : 'none' }}>
-                            {/* Logo IF / Embrapa Dentro do Menu */}
-                            <div className='logo-container-fixed'>
-                                <div className="logo-container d-flex align-items-center justify-content-between">
-                                    <Link href="/home">
-                                        <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
-                                    </Link>
-                                    <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={() => { closeSidebar(); setShowSummary(true); }}></button>
-                                </div>
-                            </div>
-                            <hr className="featurette-divider line-menu"></hr>
-                            {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
-                            <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={() => setShowSummary(true)}>← Voltar para o menu principal</button>
-                            {/* Dropdown do Sumário */}
-                            {data.length > 0 ? (
-                                <div>
-                                    <a
-                                    className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple`}
-                                    aria-current="true"
-                                    onClick={() => toggleItem('summary')}
-                                    >
-                                    <span className="w-100 text-primary">Sumário</span>
-                                    <i className={`fas fa-chevron-${expandedItems.includes('summary') ? 'down' : 'right'} icon-deg`}></i>
-                                    </a>
-                                    <SumarioDropdown
-                                        data={data}
-                                        expandedItems={expandedItems}
-                                        toggleItem={toggleItem}
-                                        activeTitle={activeTitle}
-                                        handleTitleClick={handleTitleClick}
-                                        handleSubitemContent={(e, sectionId, chapterIndex) => handleSubitemContent(e, sectionId, chapterIndex)}
-                                        scrollToTop={scrollToTop}
-                                    />
-
-                                </div>
-                                ) : (
-                                <p className='d-flex justify-content-center' style={{ marginTop: 20 }}>Carregando dados...</p>
-                                )}
-                        </div>
-                    </div>
-                    {/* Opções Retornadas quando o Usuário Aperta no Botão "← Voltar para o menu principal" */}
-                    <div id='main-navbar-options-menu' style={{ marginTop: 16, display: showSummary ? 'none' : 'block' }}>
-                        <div className="logo-container d-flex align-items-center justify-content-between">
-                            <Link href="/home">
-                                <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
-                            </Link>
-                            <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="sidebar" aria-label="Close" onClick={closeSidebar}></button>
-                        </div>
-                        <hr className="featurette-divider line-menu"></hr>
-                        <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={toggleSummaryAndMainMenu}>← Voltar para o Sumário</button>
-                        <ul className="navbar-nav ms-auto d-flex itens-menu-cap">
-                            <li className="nav-item mx-3">
-                                <Link className="nav-link back-item-link py-2" href="/sumario" aria-current="page">
-                                    <span className="link-text">Sumário</span>
-                                </Link> 
-                            </li>
-                            <li className="nav-item mx-3">
-                                <Link className="nav-link back-item-link py-2" href="/autores" aria-current="page">
-                                    <span className="link-text">Autores</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-                {/* Código Navbar */}
-                <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                    <div className="container-fluid">
-                        <button className="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
-                            aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle Offcanvas" onClick={handleToggleBackDrop}>
-                            <i className="fas fa-bars"></i>
-                        </button>
-                        {/* Logo Navbar */}
-                        <Link className="navbar-brand" href="/home">
-                            <Image src={Logo} width={160} height={35} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
-                        </Link>
-                        {/* Código dos Itens Exibidos no Navbar */}
-                        <ul className="navbar-nav ms-auto d-flex flex-row">
-                            <li className="nav-item text-item-link">
-                                <Link className="nav-link back-item-link" href="/sumario" aria-current="page">
-                                    <span className="link-text">Sumário</span>
-                                </Link> 
-                            </li>
-                            <li className="nav-item text-item-link">
-                                <Link className="nav-link back-item-link" href="/autores" aria-current="page">
-                                    <span className="link-text">Autores</span>
-                                </Link>
-                            </li>
-                            {/* Input Search para tela maior que 992px */}
-                            <div className="hide-form-search2">
-                                <form className="d-flex rounded-pill position-relative first-form-search" role="search">
-                                    <div className="search-bar-container p-1">
-                                        <SearchBar setResults={setResults} />
-                                        {results && results.length > 0 && <SearchResultsList results={results} handleCloseResults={handleCloseResults} />}
-                                    </div>
-                                </form>
-                            </div>
-
-                            <li className="nav-item">
-                                <Image src={LogoIF} className='logotipo img' width={130} height={35} alt="Logotipo do IFMS Campus Dourados" priority/>
-                            </li>
-                            <li className="nav-item me-lg-0">
-                                <Image src={LogoEmbrapa} className='logotipo img' width={70} height={48} alt="Logotipo da Embrapa" priority/>
-                            </li>
-
-                            {/* Input Search para tela menor que 992px */}
-                            <form className="d-flex rounded-pill position-relative" role="search">
-                                <div className="input-group hide-form-search">
-                                    <div className="search-bar-container">
-                                        <SearchBar setResults={setResults} />
-                                        {results && results.length > 0 && <SearchResultsList results={results}  handleCloseResults={handleCloseResults} />}
-                                    </div>
-                                </div>
-                            </form>
-                        </ul>
-                    </div>
-                    {isOffcanvasOpen && <div className="offcanvas-backdrop show" onClick={handleToggleBackDrop}></div>}
-                </nav>
+                <Sidebar
+                    data={data}
+                    isOffcanvasOpen={isOffcanvasOpen}
+                    closeSidebar={closeSidebar}
+                    setShowSummary={setShowSummary}
+                    showSummary={showSummary}
+                    expandedItems={expandedItems}
+                    toggleItem={toggleItem}
+                    activeTitle={activeTitle}
+                    handleTitleClick={handleTitleClick}
+                    handleSubitemContent={(e, sectionId, chapterIndex) => handleSubitemContent(e, sectionId, chapterIndex)}
+                    scrollToTop={scrollToTop}
+                    toggleSummaryAndMainMenu = {toggleSummaryAndMainMenu}
+                />            
                 
                 {/* Conteúdo da Cartilha */}
                 <main className='docMainContainer_gTbr'>

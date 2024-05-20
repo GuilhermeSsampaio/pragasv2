@@ -1,31 +1,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const Sidebar = ({ data }) => {
-    var LogoIF = require('../public/ifms-dr-marca-2015.png');
-    var LogoEmbrapa = require('../public/logo-embrapa-400.png');
-    var LogoIFEmbrapa = require('../public/logo-if-embrapa.png');
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    // const [activeTitle, setActiveTitle] = useState(null);
-    const [showSummary, setShowSummary] = useState(true);
-    const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-
-    const handleToggle = () => {
-        setIsCollapsed(!isCollapsed);
-    };
-
-    const handleTitleClick = (id) => {
-        setActiveTitle(5);
-    };
-
-    const closeSidebar = () => {
-        setIsOffcanvasOpen(false);
-    };
-
-    const toggleSummaryAndMainMenu = () => {
-        setShowSummary(!showSummary);
-    };
+import SumarioDropdown from '../capitulos/SumarioDropDown';
+const Sidebar = ({ data, isOffcanvasOpen, closeSidebar, setShowSummary, showSummary, expandedItems, toggleItem, activeTitle, handleTitleClick, handleSubitemContent, scrollToTop, toggleSummaryAndMainMenu }) => {
+  var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
 
     return (
         <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white thin-scrollbar ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
@@ -35,54 +13,46 @@ const Sidebar = ({ data }) => {
                     <div className='logo-container-fixed'>
                         <div className="logo-container d-flex align-items-center justify-content-between">
                             <Link href="/home">
-                                <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority />
+                                <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
                             </Link>
-                            <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={closeSidebar}></button>
+                            <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={() => { closeSidebar(); setShowSummary(true); }}></button>
                         </div>
                     </div>
                     <hr className="featurette-divider line-menu"></hr>
                     {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
                     <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={() => setShowSummary(true)}>← Voltar para o menu principal</button>
                     {/* Dropdown do Sumário */}
-                    <div>
-                        <a
-                            className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${isCollapsed ? 'collapsed' : ''}`}
+                    {data.length > 0 ? (
+                        <div>
+                            <a
+                            className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple`}
                             aria-current="true"
-                            onClick={handleToggle}
-                        >
-                            <span className="w-100 text-primary">Sumário</span>{' '}
-                            <i className={`fas fa-chevron-${isCollapsed ? 'right' : 'down'} icon-deg`}></i>
-                        </a>
-                        {/* Conteúdo do Sidebar, dentro do Dropdown Sumário */}
-                        {data.length > 0 ? (
-                            data.map((item) => (
-                                <ul key={item.id} id="collapseExample1"
-                                    className={`list-group list-group-flush mx-2 py-1 ${isCollapsed ? 'collapse' : 'show'}`}
-                                >
-                                    <li className={`list-group-item py-2 ${activeTitle === item.id ? 'active' : ''}`}
-                                        onClick={() => { handleTitleClick(item.id); setIsOffcanvasOpen(false); }}
-                                        style={{ cursor: 'pointer' }}
-                                    >
-                                        <a
-                                            href={`#capitulo_${item.id}`}
-                                            className={activeTitle === item.id ? 'active-link-summary' : ''}
-                                        >
-                                            {item.attributes.title}
-                                        </a>
-                                    </li>
-                                </ul>
-                            ))
+                            onClick={() => toggleItem('summary')}
+                            >
+                            <span className="w-100 text-primary">Sumário</span>
+                            <i className={`fas fa-chevron-${expandedItems.includes('summary') ? 'down' : 'right'} icon-deg`}></i>
+                            </a>
+                            <SumarioDropdown
+                                data={data}
+                                expandedItems={expandedItems}
+                                toggleItem={toggleItem}
+                                activeTitle={activeTitle}
+                                handleTitleClick={handleTitleClick}
+                                handleSubitemContent={(e, sectionId, chapterIndex) => handleSubitemContent(e, sectionId, chapterIndex)}
+                                scrollToTop={scrollToTop}
+                            />
+
+                        </div>
                         ) : (
-                            <p className='d-flex justify-content-center' style={{ marginTop: 20 }}>Carregando dados...</p>
+                        <p className='d-flex justify-content-center' style={{ marginTop: 20 }}>Carregando dados...</p>
                         )}
-                    </div>
                 </div>
             </div>
             {/* Opções Retornadas quando o Usuário Aperta no Botão "← Voltar para o menu principal" */}
             <div id='main-navbar-options-menu' style={{ marginTop: 16, display: showSummary ? 'none' : 'block' }}>
                 <div className="logo-container d-flex align-items-center justify-content-between">
                     <Link href="/home">
-                        <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority />
+                        <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
                     </Link>
                     <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="sidebar" aria-label="Close" onClick={closeSidebar}></button>
                 </div>
@@ -92,7 +62,7 @@ const Sidebar = ({ data }) => {
                     <li className="nav-item mx-3">
                         <Link className="nav-link back-item-link py-2" href="/sumario" aria-current="page">
                             <span className="link-text">Sumário</span>
-                        </Link>
+                        </Link> 
                     </li>
                     <li className="nav-item mx-3">
                         <Link className="nav-link back-item-link py-2" href="/autores" aria-current="page">
