@@ -2,24 +2,13 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import Logo from '../../public/logo.png'
 import InstallButton from '../utils/InstallButton'
 import InstallButtonIos from '../utils/InstallButtonIos'
-import { SearchBar } from "../search/SearchBar.jsx";
-import { SearchResultsList } from "../search/SearchResultsList.jsx";
 import { isAndroid, isIOS, isDesktop } from 'react-device-detect'
 export const HomePage = () => {
     //Importação das Imagens
-    var LogoIF = require('../../public/ifms-dr-marca-2015.png');
-    var LogoEmbrapa = require('../../public/logo-embrapa-400.png');
-    var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
     var LogoCartilha = require('../../public/logo-cartilha.svg');   
     var Adeney = require('../../public/adeney.jpg');   
-    const [results, setResults] = useState([]);
-    
-    const handleCloseResults = () => {
-        setResults([]); // Limpa os resultados
-    };
 
     return(
         <>

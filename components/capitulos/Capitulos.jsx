@@ -6,10 +6,6 @@ import TextCapitulos from './TextCapitulos.jsx'
 import FetchApiOffline from '../../localDatabase/FetchApiOffline.jsx';
 import Sidebar from '../sidebar/Sidebar.jsx'
 export const Capitulos = () => {
-    //Importação das Imagens
-
-    var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
-
     const router = useRouter();
     const { query } = router;
     const { asPath } = router;

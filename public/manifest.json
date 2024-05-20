@@ -1,6 +1,6 @@
 {
-    "name": "template-pwa",
-    "short_name": "template-pwa",
+    "name": "pwa - pragasv2",
+    "short_name": "pwa pragas",
     "description": "template pwa cartilha",
     "start_url": "/",
     "display": "standalone",
