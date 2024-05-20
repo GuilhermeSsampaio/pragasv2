@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import { Capitulos } from './Capitulos';
-import TextCapitulos from './TextCapitulos';
 
-const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleTitleClick, setContentId , handleSubitemContent}) => {
-  const [clickedItemId, setClickedItemId] = useState(null);
+const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleTitleClick, handleSubitemContent, scrollToTop }) => {
+  const [activeSubchapter, setActiveSubchapter] = useState(null);
+
+
+  const handleChapterClick = (itemId) => {
+    toggleItem(itemId);
+    scrollToTop();
+  };
+
+  const handleSubchapterClick = (e, chapterId, subchapterId) => {
+    e.preventDefault();
+    setActiveSubchapter(subchapterId);
+    handleTitleClick(chapterId);
+    handleSubitemContent(e, subchapterId);
+    scrollToTop();
+  };
 
   return (
     <div id="summary-content" className={`list-group list-group-flush mx-2 py-1 ${expandedItems.includes('summary') ? 'show' : 'collapse'}`}>
@@ -11,7 +23,7 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleT
         <div key={item.id}>
           <a
             className={`list-group-item list-group-item-action py-2 ${expandedItems.includes(item.id) ? 'active' : ''}`}
-            onClick={() => toggleItem(item.id)}
+            onClick={() => handleChapterClick(item.id)}
             style={{ cursor: 'pointer' }}
           >
             <div className="d-flex justify-content-between align-items-center">
@@ -30,16 +42,15 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleT
               {item.attributes.conteudo.map((conteudoItem, index) => (
                 <li
                   key={conteudoItem.id}
-                  className={`list-group-item py-2 ${activeTitle === item.id ? 'active' : ''}`}
-                  onClick={() => { handleTitleClick(item.id); }}
+                  className={`list-group-item py-2 ${activeSubchapter === conteudoItem.id ? 'active' : ''}`}
                   style={{ cursor: 'pointer' }}
                 >
                   <a
                     data-conteudo-index={index}
                     data-chapter-index={chapterIndex}
                     href={`#capitulo_${conteudoItem.id}`}
-                    className={activeTitle === item.id ? 'active-link-summary' : ''}
-                    onClick={(e) => handleSubitemContent(e, conteudoItem.id)}
+                    className={activeSubchapter === conteudoItem.id ? 'active-link-summary' : ''}
+                    onClick={(e) => handleSubchapterClick(e, item.id, conteudoItem.id)}
                   >
                     {conteudoItem.titulo_secao}
                   </a>
@@ -49,21 +60,6 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleT
           )}
         </div>
       ))}
-
-      {clickedItemId !== null && (
-        <div className="clicked-item-content">
-          {data.map((item) => (
-            item.attributes.conteudo.map((conteudoItem) => (
-              conteudoItem.id === clickedItemId && (
-                <div key={conteudoItem.id}>
-                  <h3>{conteudoItem.titulo_secao}</h3>
-                  <p>{conteudoItem.texto_conteudo}</p>
-                </div>
-              )
-            ))
-          ))}
-        </div>
-      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ChapterContent = ({ cap, activeTitle, convertToHTML, contentId }) => {
-  console.log('contentId', contentId);
+  // console.log('contentId', contentId);
 
   return (
     <article key={cap.id} className="article">

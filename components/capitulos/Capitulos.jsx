@@ -51,9 +51,9 @@ export const Capitulos = () => {
         setClickedSectionId(0);
         const content = data[chapterIndex].attributes.conteudo[index];
         setClickedSectionId(content.id);
-        console.log(`id clicado: ${content.id} titulo: ${content.titulo_secao}`);
+        // console.log(`id clicado: ${content.id} titulo: ${content.titulo_secao}`);
     };
-    console.log('id: ', clickedSectionId);
+    // console.log('id: ', clickedSectionId);
 
     const toggleItem = (itemId) => {
         if (expandedItems.includes(itemId)) {
@@ -237,6 +237,7 @@ export const Capitulos = () => {
                                         activeTitle={activeTitle}
                                         handleTitleClick={handleTitleClick}
                                         handleSubitemContent={(e, sectionId, chapterIndex) => handleSubitemContent(e, sectionId, chapterIndex)}
+                                        scrollToTop={scrollToTop}
                                     />
 
                                 </div>

@@ -35,7 +35,7 @@ export const Autores = () => {
                 true
             );
             setData(res);
-            console.log('Autores carregados no novo jeito:', res)
+            // console.log('Autores carregados no novo jeito:', res)
         } catch (error) {
             console.error('Erro ao carregar os autores:', error);
         }

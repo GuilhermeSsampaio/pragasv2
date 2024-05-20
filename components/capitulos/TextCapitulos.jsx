@@ -5,7 +5,7 @@ import ChapterContent from './ChapterContent';
 let i = 0;
 
 const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId}) => {
-  console.log('idtextbb', contentId)
+  // console.log('idtextbb', contentId)
   
   const [headerBlocks, setHeaderBlocks] = useState([]);
 
