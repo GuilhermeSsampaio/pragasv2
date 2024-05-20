@@ -48,7 +48,7 @@ export const Autores = () => {
               // Parse da string de descrição para objeto JSON
               const descriptionData = JSON.parse(item.attributes.description);
               return (
-                <CardAutor item={item}descriptionData={descriptionData}/>
+                <CardAutor item={item} descriptionData={descriptionData}/>
               );
             })
           ) : (

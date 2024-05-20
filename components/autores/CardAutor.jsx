@@ -3,7 +3,7 @@ export default function CardAutor({ item, descriptionData }) {
     if (!item || !descriptionData) {
       return null; // Retorna null se os dados do autor não estiverem disponíveis
     }
-
+  
     return (
       <div key={item.id} className="card">
         <div className="containerAutor_v1t1">
