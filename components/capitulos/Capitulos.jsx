@@ -5,7 +5,7 @@ import TextCapitulos from './TextCapitulos.jsx';
 import { useCapitulosData } from '../../hooks/useCapitulosData';
 import { useSidebar } from '../../hooks/useSidebar';
 import Sidebar from '../sidebar/Sidebar.jsx';
-import Breadcrumbs from './Breadcrumbs.jsx';
+import Breadcrumbs from '../utils/Breadcrumbs.jsx';
 
 //componente principal de capítulos que renderiza a barra lateral e o conteúdo do capítulo
 
