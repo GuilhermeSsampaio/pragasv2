@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import FetchApiOffline from '../localDatabase/FetchApiOffline.jsx';
+import FetchApiOffline from '../localDatabase/FetchApiOffline.js';
 
 //hook que carrega os capítulos da cartilha
 export const useCapitulosData = (asPath, setActiveTitle) => {

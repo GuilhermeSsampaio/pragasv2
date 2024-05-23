@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import FetchApiOffline from "../../localDatabase/FetchApiOffline.jsx";
+import FetchApiOffline from "../../localDatabase/FetchApiOffline.js";
 import CardAutor from "./CardAutor.jsx";
 import AutoresList from "./AutoresList.jsx";
 
