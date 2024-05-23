@@ -5,6 +5,9 @@ import Link from 'next/link'
 import InstallButton from '../utils/InstallButton'
 import InstallButtonIos from '../utils/InstallButtonIos'
 import { isAndroid, isIOS, isDesktop } from 'react-device-detect'
+
+//home
+
 export const HomePage = () => {
     //Importação das Imagens
     var LogoCartilha = require('../../public/logo-cartilha.svg');   

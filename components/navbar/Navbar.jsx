@@ -5,6 +5,8 @@ import { SearchResultsList } from "../search/SearchResultsList"
 import Logo from '../../public/logo.png'
 import { useState } from 'react'
 
+//navbar
+
 export default function Navbar () {
     var LogoIF = require('../../public/ifms-dr-marca-2015.png');
     var LogoEmbrapa = require('../../public/logo-embrapa-400.png');

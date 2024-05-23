@@ -1,4 +1,7 @@
 export default function Footer() {
+
+    //rodapé
+    
     return(
         <footer>
         <div className="container container-footer">

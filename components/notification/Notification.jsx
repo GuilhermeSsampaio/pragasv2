@@ -2,6 +2,8 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+//componente de notificações
+
 class Notification extends React.Component {
   componentDidMount() {
     window.addEventListener('offline', this.handleNetworkChange);
