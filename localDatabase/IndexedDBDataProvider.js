@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { obterDadosDoIndexedDB } from './obterDadosDoIndexedDB';
 const IndexedDBDataProvider = (apiUrl, dbName, storeName, keyPath) => {
     const [data, setData] = useState([]);
 
@@ -36,25 +36,25 @@ const IndexedDBDataProvider = (apiUrl, dbName, storeName, keyPath) => {
         }
     };
 
-    const obterDadosDoIndexedDB = async () => {
-        try {
-            const db = await abrirBancoDeDados();
-            const transaction = db.transaction([storeName], "readonly");
-            const store = transaction.objectStore(storeName);
-            const request = store.getAll();
-            return new Promise((resolve, reject) => {
-                request.onsuccess = function(event) {
-                    resolve(event.target.result);
-                };
-                request.onerror = function(event) {
-                    reject(event.target.error);
-                };
-            });
-        } catch (error) {
-            console.error("Erro ao obter dados do IndexedDB:", error);
-            return [];
-        }
-    };
+    // const obterDadosDoIndexedDB = async () => {
+    //     try {
+    //         const db = await abrirBancoDeDados();
+    //         const transaction = db.transaction([storeName], "readonly");
+    //         const store = transaction.objectStore(storeName);
+    //         const request = store.getAll();
+    //         return new Promise((resolve, reject) => {
+    //             request.onsuccess = function(event) {
+    //                 resolve(event.target.result);
+    //             };
+    //             request.onerror = function(event) {
+    //                 reject(event.target.error);
+    //             };
+    //         });
+    //     } catch (error) {
+    //         console.error("Erro ao obter dados do IndexedDB:", error);
+    //         return [];
+    //     }
+    // };
 
     useEffect(() => {
         const fetchData = async () => {
