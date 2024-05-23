@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import FetchApiOffline from "../../localDatabase/FetchApiOffline.jsx";
 import CardAutor from "./CardAutor.jsx";
+import AutoresList from "./AutoresList.jsx";
 
 export const Autores = () => {
 
@@ -40,22 +41,8 @@ export const Autores = () => {
         <div className="headerTitle">
           <h1>Autores</h1>
         </div>
-        {/* Código dos Card dos Autores */}
-        <div className="main-container-cards container-cards">
-          {/* Puxando os Dados do Fetch */}
-          {data.length > 0 ? (
-            data.map((item) => {
-              // Parse da string de descrição para objeto JSON
-              const descriptionData = JSON.parse(item.attributes.description);
-              return (
-                <CardAutor item={item} descriptionData={descriptionData}/>
-              );
-            })
-          ) : (
-            <p>Carregando dados...</p>
-          )}
+        <AutoresList data={data} />
         </div>
-      </div>
     </>
   );
 };
