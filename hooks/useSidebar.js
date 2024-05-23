@@ -26,6 +26,11 @@ export const useSidebar = () => {
     setShowSummary(!showSummary);
   };
 
+  const handleTitleClick = (titleId) => {
+    setActiveTitle(titleId);
+    localStorage.setItem('activeChapter', titleId.toString()); // Armazena o ID no localStorage
+};    
+
   useEffect(() => {
     const backButton = document.getElementById('back-button');
     if (backButton) {

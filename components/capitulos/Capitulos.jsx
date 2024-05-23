@@ -14,6 +14,7 @@ export const Capitulos = () => {
   const { asPath } = router;
   const [activeTitle, setActiveTitle] = useState(null);
 
+
   const { data, clickedSectionId, loadContent } = useCapitulosData(asPath, setActiveTitle);
   const {
     isCollapsed,
@@ -55,7 +56,7 @@ export const Capitulos = () => {
           expandedItems={expandedItems}
           toggleItem={toggleItem}
           activeTitle={activeTitle}
-          handleTitleClick={setActiveTitle}
+          setActiveTitle={setActiveTitle}
           handleSubitemContent={(e) => {
             e.preventDefault();
             const index = +e.target.dataset.conteudoIndex;

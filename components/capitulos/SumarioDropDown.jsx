@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleTitleClick, handleSubitemContent, scrollToTop }) => {
+const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle,setActiveTitle, handleSubitemContent, scrollToTop }) => {
   const [activeSubchapter, setActiveSubchapter] = useState(null);
 
 
@@ -8,6 +8,10 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle, handleT
     toggleItem(itemId);
     scrollToTop();
   };
+  const handleTitleClick = (titleId) => {
+    setActiveTitle(titleId);
+    localStorage.setItem('activeChapter', titleId.toString()); // Armazena o ID no localStorage
+};    
 
   const handleSubchapterClick = (e, chapterId, subchapterId) => {
     e.preventDefault();

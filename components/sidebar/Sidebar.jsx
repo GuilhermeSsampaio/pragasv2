@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SumarioDropdown from '../capitulos/SumarioDropDown';
-const Sidebar = ({ data, isOffcanvasOpen, closeSidebar, setShowSummary, showSummary, expandedItems, toggleItem, activeTitle, handleTitleClick, handleSubitemContent, scrollToTop, toggleSummaryAndMainMenu }) => {
+const Sidebar = ({ data, isOffcanvasOpen, closeSidebar, setShowSummary, showSummary, expandedItems, toggleItem, activeTitle, setActiveTitle, handleSubitemContent, scrollToTop, toggleSummaryAndMainMenu }) => {
   var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
 
     return (
@@ -37,7 +37,8 @@ const Sidebar = ({ data, isOffcanvasOpen, closeSidebar, setShowSummary, showSumm
                                 expandedItems={expandedItems}
                                 toggleItem={toggleItem}
                                 activeTitle={activeTitle}
-                                handleTitleClick={handleTitleClick}
+                                setActiveTitle={setActiveTitle}
+                                // handleTitleClick={handleTitleClick}
                                 handleSubitemContent={(e, sectionId, chapterIndex) => handleSubitemContent(e, sectionId, chapterIndex)}
                                 scrollToTop={scrollToTop}
                             />
