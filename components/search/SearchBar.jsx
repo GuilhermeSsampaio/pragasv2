@@ -1,46 +1,42 @@
 import { useState, useEffect } from "react";
-// import FetchApiOffline from "../../localDatabase/FetchApiOffline"; 
+import FetchApiOffline from "../../localDatabase/FetchApiOffline"; // Certifique-se de importar o componente FetchApiOffline corretamente
 
+// Componente que realiza a pesquisa de capítulos
 export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
-  const [typingTimeout, setTypingTimeout] = useState(null);
   const [showNoResultsMessage, setShowNoResultsMessage] = useState(false);
-
-  const fetchData = (value) => {
-    fetch("https://api-cartilha-teste.onrender.com/api/pragas?populate=*")
-      .then((response) => response.json())
-      .then((data) => {
-        const results = [];
-        data.data.forEach((praga) => {
-          praga.attributes.conteudo.forEach((item) => {
-            if (item.titulo_secao.toLowerCase().includes(value.toLowerCase())) {
-              results.push(praga);
-            }
-          });
-        });
-        setResults(results);
-        setShowNoResultsMessage(results.length === 0 && value.trim() !== ""); 
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar dados:", error);
-        setResults([]);
-        setShowNoResultsMessage(true);
-      });
-  };  
-
-  const handleChange = (value) => {
+  
+  const handleChange = async (value) => {
     setInput(value);
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
+    try {
+      const data = await FetchApiOffline(
+        "https://api-cartilha-teste.onrender.com/api/pragas?populate=*",
+        "api-manual",
+        "pragas",
+        "id",
+        false
+      );
+      const results = data.reduce((acc, praga) => {
+        const matchingConteudos = praga.attributes.conteudo.filter((conteudo) =>
+          conteudo.titulo_secao.toLowerCase().includes(value.toLowerCase())
+        );
+        if (matchingConteudos.length > 0) {
+          acc.push({ ...praga, attributes: { ...praga.attributes, conteudo: matchingConteudos } });
+        }
+        return acc;
+      }, []);
+      setResults(results);
+      setShowNoResultsMessage(results.length === 0 && value.trim() !== "");
+    } catch (error) {
+      console.error("Erro ao buscar os dados:", error);
+      setResults([]);
+      setShowNoResultsMessage(true);
     }
-
-    const timeout = setTimeout(() => {
-      fetchData(value.toLowerCase());
-    }, 200);
-
-    setTypingTimeout(timeout);
   };
+  
+  
 
+  // Limpa os resultados e a mensagem de nenhum resultado ao mudar o input
   useEffect(() => {
     setResults([]);
     setShowNoResultsMessage(false);
@@ -55,7 +51,11 @@ export const SearchBar = ({ setResults }) => {
         value={input}
         onChange={(e) => handleChange(e.target.value)}
       />
-      {showNoResultsMessage && <div className="results-list"><p className='result-nulo'>Nenhum resultado encontrado para "{input}".</p></div>}
+      {showNoResultsMessage && (
+        <div className="results-list">
+          <p className="result-nulo">Nenhum resultado encontrado para "{input}".</p>
+        </div>
+      )}
     </div>
   );
 };
