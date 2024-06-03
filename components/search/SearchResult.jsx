@@ -9,7 +9,8 @@ export const SearchResult = ({ result }) => {
     <div className="search-result">
       {result.attributes.conteudo.map((conteudoItem, index) => (
         <div key={index}>
-          {conteudoItem.titulo_secao}
+          {/* Renderize o link para o subcapítulo */}
+            {conteudoItem.titulo_secao}
         </div>
       ))}
     </div>

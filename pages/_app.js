@@ -41,16 +41,16 @@ function MyApp({ Component, pageProps }) {
   const [capitulos, setCapitulos] = useState([]);
   const [autores, setAutores] = useState([]);
 
-  const capitulosData = IndexedDBDataProvider("https://api-cartilha-teste.onrender.com/api/pragas?populate=*", "api-manual",  "pragas",  "id");
-  const autoresData = IndexedDBDataProvider("https://api-cartilha-teste.onrender.com/api/autors?populate=*", "api-autores",  "autores",  "id");
+  // const capitulosData = IndexedDBDataProvider("https://api-cartilha-teste.onrender.com/api/pragas?populate=*", "api-manual",  "pragas",  "id");
+  // const autoresData = IndexedDBDataProvider("https://api-cartilha-teste.onrender.com/api/autors?populate=*", "api-autores",  "autores",  "id");
 
-  useEffect(() => {
-    setCapitulos(capitulosData);
-  }, [capitulosData]);
+  // useEffect(() => {
+  //   setCapitulos(capitulosData);
+  // }, [capitulosData]);
 
-  useEffect(() => {
-    setAutores(autoresData);
-  }, [autoresData]);
+  // useEffect(() => {
+  //   setAutores(autoresData);
+  // }, [autoresData]);
 
 
 

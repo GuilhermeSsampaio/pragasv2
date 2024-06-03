@@ -21,16 +21,25 @@ export const Capitulos = () => {
   var LogoIF = require("../../public/ifms-dr-marca-2015.png");
   var LogoEmbrapa = require("../../public/logo-embrapa-400.png");
   var LogoIFEmbrapa = require("../../public/logo-if-embrapa.png");
-
+  const [data, setData] = useState([]);
   const router = useRouter();
+  const { query } = router;
   const { asPath } = router;
+
   const [activeTitle, setActiveTitle] = useState(null);
   const [results, setResults] = useState([]);
   const handleCloseResults = () => {
     setResults([]); // Limpa os resultados
 };
+const [clickedSectionId, setClickedSectionId] = useState(null);
 
-  const { data, clickedSectionId, loadContent } = useCapitulosData(asPath, setActiveTitle);
+const loadContent = (index, chapterIndex) => {
+  setClickedSectionId(0);
+  const content = data[chapterIndex].attributes.conteudo[index];
+  setClickedSectionId(content.id);
+};
+
+  // const { clickedSectionId, loadContent } = useCapitulosData(asPath, setActiveTitle);
   const {
     isCollapsed,
     isOffcanvasOpen,
@@ -56,15 +65,18 @@ export const Capitulos = () => {
     expandedItems.includes(chapterId) || toggleItem(chapterId);
     handleTitleClick(chapterId);
     handleSubitemContent(e, subchapterId);
+    // urlRouter(chapterId, subchapterId);
     scrollToTop();
+    router.push(`/sumario?activeChapter=${chapterId}&activeSubChapter=${subchapterId}`, undefined, { shallow: true });
+
   };
 
-  useEffect(() => {
+  const urlRouter = (chapterId, subchapterId) => {
     if (activeTitle === null && data.length > 0) {
       setActiveTitle(data[0].id);
-      router.push(`/sumario?activeChapter=${data[0].id}`, undefined, { shallow: true });
+      router.push(`/sumario?activeChapter=${chapterId}&activeSubChapter=${subchapterId}`, undefined, { shallow: true });
     }
-  }, [activeTitle, data, router]);
+  };
 
   const activeChapter = data.find(item => item.id === activeTitle);
   const displayedTitle = activeChapter ? activeChapter.attributes.title : 'Título do Capítulo';
@@ -79,6 +91,8 @@ const closeSidebar = () => {
 };
 const handleChapterClick = (itemId) => {
   console.log("handleChapterClick");
+  // router.push(`/sumario?activeChapter=${itemId}`);
+
   toggleItem(itemId);
   scrollToTop();
 };
@@ -98,16 +112,66 @@ const handleSubitemContent = (e) => {
   loadContent(index, chapter);
 };
 
-// const loadContent = (index, chapterIndex) => {
-//   // setActiveTitle(item.id);
-//   // const targetId = `capitulo_${conteudoItem.id}`;
-//   // const targetElement = document.getElementById(targetId);
-//   // if (targetElement) {
-//   //     targetElement.scrollIntoView({ behavior: 'smooth' });
-//   // }
-//   const content = data[chapterIndex].attributes.conteudo[index];
-//   // console.log(content);
-// };
+
+// useEffect(() => {
+//   if (activeTitle === null) {
+//       // Verifique se data não é nulo e se tem pelo menos um elemento
+//       if (data && data.length > 0) {
+//         // Se for nulo, defina-o como o primeiro capítulo da API
+//         setActiveTitle(data[0].id);
+  
+//         // Use useRouter para navegar para o capítulo ativo
+//         router.push(`/sumario?activeChapter=${data[0].id}`, undefined, { shallow: true });
+//       }
+//     }
+//   scrollToTop();
+// }, [activeTitle, data, router]);
+
+
+useEffect(() => {
+  // Carrega os capítulos ao montar o componente
+  CarregaCapitulos();
+}, []);
+
+useEffect(() => {
+  const chapterNumber = extractChapterNumberFromAnchor(asPath);
+  if (chapterNumber !== null) {
+      setActiveTitle(chapterNumber);
+  }
+}, [asPath]);
+
+const extractChapterNumberFromAnchor = (path) => {
+  const match = path.match(/#capitulo_(\d+)/);
+  return match ? parseInt(match[1]) : null;
+};
+
+const CarregaCapitulos = async () => {
+  //const url = 'https://tecnofam-strapi.a.cnpgc.embrapa.br/api/capitulos?populate=*';
+  // const url = 'https://api-cartilha-teste-production.up.railway.app/api/capitulos?populate=*'
+  const url = 'https://api-cartilha-teste.onrender.com/api/pragas?populate=*';
+
+  try {
+      const response = await fetch(url);
+      if (response.ok) {
+          const json = await response.json();
+          const data = json.data;
+          setData(data);
+          
+          if (asPath.includes('#capitulo_')) {
+              const chapterNumber = extractChapterNumberFromAnchor(asPath);
+              setActiveTitle(chapterNumber);
+          } else if (data.length > 0) {
+              setActiveTitle(data[0].id);
+          }
+      } else {
+          throw new Error('Falha na requisição. Código de status: ' + response.status);
+      }
+  } catch (error) {
+      console.error(error);
+  }
+};
+
+
   return (
     <>
       <Head>
@@ -116,40 +180,7 @@ const handleSubitemContent = (e) => {
       </Head>
 
       <div className="container-wrapper">
-        {/* <Sidebar
-          data={data}
-          isOffcanvasOpen={isOffcanvasOpen}
-          closeSidebar={() => setIsOffcanvasOpen(false)}
-          setIsOffcanvasOpen={setIsOffcanvasOpen}
-          setShowSummary={setShowSummary}
-          showSummary={showSummary}
-          expandedItems={expandedItems}
-          toggleItem={toggleItem}
-          activeTitle={activeTitle}
-          setActiveTitle={setActiveTitle}
-          handleSubitemContent={(e) => {
-            e.preventDefault();
-            const index = +e.target.dataset.conteudoIndex;
-            const chapter = +e.target.dataset.chapterIndex;
-            loadContent(index, chapter);
-          }}
-          scrollToTop={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          toggleSummaryAndMainMenu={toggleSummaryAndMainMenu}
-        />
-
-        <main className='docMainContainer_gTbr'>
-          <div className='container padding-bottom--lg'>
-            <div className='col'>
-              <Breadcrumbs displayedTitle={displayedTitle} />
-              <section className="home-section right-sidebar" style={{ marginTop: 30 }}>
-                <div id="contents" className="bd-content ps-lg-2">
-                  <TextCapitulos lista={data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} contentId={clickedSectionId} />
-                </div>
-              </section>
-            </div>
-          </div>
-        </main>
-      </div> */}
+        {/* Código Sidebar */}
       <nav
           id="sidebarMenu"
           className={`collapse d-lg-block sidebar bg-white thin-scrollbar ${
@@ -270,9 +301,9 @@ const handleSubitemContent = (e) => {
                                   style={{ cursor: "pointer" }}
                                 >
                                   <a
+                                    href={`#capitulo_${conteudoItem.id}`}
                                     data-conteudo-index={index}
                                     data-chapter-index={chapterIndex}
-                                    href={`#capitulo_${conteudoItem.id}`}
                                     className={
                                       activeSubchapter === conteudoItem.id
                                         ? "active-link-summary"
@@ -418,12 +449,15 @@ const handleSubitemContent = (e) => {
                   role="search"
                 >
                   <div className="search-bar-container p-1">
+                    {                      console.log("results", results)
+}
                     <SearchBar setResults={setResults} />
                     {results && results.length > 0 && (
                       <SearchResultsList
                         results={results}
                         handleCloseResults={handleCloseResults}
                       />
+
                     )}
                   </div>
                 </form>
