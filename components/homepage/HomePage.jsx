@@ -5,6 +5,11 @@ import Link from 'next/link'
 import InstallButton from '../utils/InstallButton'
 import InstallButtonIos from '../utils/InstallButtonIos'
 import { isAndroid, isIOS, isDesktop } from 'react-device-detect'
+import { SearchBar } from '../search/SearchBar'
+import { SearchResultsList } from '../search/SearchResultsList'
+import Logo from '../../public/logo.png'
+import NavbareHome from '../navbar/NavbarHome'
+
 
 //home
 
@@ -12,14 +17,22 @@ export const HomePage = () => {
     //Importação das Imagens
     var LogoCartilha = require('../../public/logo-cartilha.svg');   
     var Adeney = require('../../public/adeney.jpg');   
-
+    var LogoIF = require('../../public/ifms-dr-marca-2015.png');
+    var LogoEmbrapa = require('../../public/logo-embrapa-400.png');
+    var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
+    const [results, setResults] = useState([]);
+    const handleCloseResults = () => {
+        setResults([]); // Limpa os resultados
+    };
     return(
         <>
             <Head>
                 <meta name="referrer" referrerPolicy="no-referrer" />
                 <title>Manual Pragas</title>
             </Head>
+                        {/* Código Navbar Offcanvas */}
 
+            <NavbareHome />
             {/* Conteúdos da Página Principal */}
             <div className="px-4 py-5 text-center hero content-after-navbar">
                 <div className='hero-text'>

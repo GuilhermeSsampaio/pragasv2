@@ -26,7 +26,9 @@ export const Capitulos = () => {
   const { asPath } = router;
   const [activeTitle, setActiveTitle] = useState(null);
   const [results, setResults] = useState([]);
-
+  const handleCloseResults = () => {
+    setResults([]); // Limpa os resultados
+};
 
   const { data, clickedSectionId, loadContent } = useCapitulosData(asPath, setActiveTitle);
   const {
@@ -44,6 +46,7 @@ export const Capitulos = () => {
 
   const [activeSubchapter, setActiveSubchapter] = useState(null);
   const handleTitleClick = (titleId) => {
+    console.log("handleTitleClick");
     setActiveTitle(titleId);
     localStorage.setItem("activeChapter", titleId.toString()); // Armazena o ID no localStorage
   };
@@ -75,6 +78,7 @@ const closeSidebar = () => {
   setIsOffcanvasOpen(false);
 };
 const handleChapterClick = (itemId) => {
+  console.log("handleChapterClick");
   toggleItem(itemId);
   scrollToTop();
 };

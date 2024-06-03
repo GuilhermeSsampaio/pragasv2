@@ -8,6 +8,7 @@ export const useSidebar = () => {
 
   const toggleItem = (itemId) => {
     if (expandedItems.includes(itemId)) {
+      console.log('includes');
       setExpandedItems(expandedItems.filter((id) => id !== itemId));
     } else {
       setExpandedItems([...expandedItems, itemId]);
@@ -15,10 +16,12 @@ export const useSidebar = () => {
   };
 
   const handleToggle = () => {
+    console.log('handleToggle');
     setIsCollapsed(!isCollapsed);
   };
 
   const handleToggleBackDrop = () => {
+    console.log('handleToggleBackDrop');
     setIsOffcanvasOpen(!isOffcanvasOpen);
   };
 
