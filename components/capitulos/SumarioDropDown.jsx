@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle,setActiveTitle, handleSubitemContent, scrollToTop }) => {
+const SumarioDropdown = ({ data, expandedItems,setIsOffcanvasOpen, toggleItem, activeTitle,setActiveTitle, handleSubitemContent, scrollToTop }) => {
   const [activeSubchapter, setActiveSubchapter] = useState(null);
 
 
@@ -16,6 +16,7 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle,setActiv
   const handleSubchapterClick = (e, chapterId, subchapterId) => {
     e.preventDefault();
     setActiveSubchapter(subchapterId);
+    expandedItems.includes(chapterId) || toggleItem(chapterId);
     handleTitleClick(chapterId);
     handleSubitemContent(e, subchapterId);
     scrollToTop();
@@ -47,6 +48,7 @@ const SumarioDropdown = ({ data, expandedItems, toggleItem, activeTitle,setActiv
                 <li
                   key={conteudoItem.id}
                   className={`list-group-item py-2 ${activeSubchapter === conteudoItem.id ? 'active' : ''}`}
+                  onClick={() => { handleTitleClick(item.id); setIsOffcanvasOpen(false); }}
                   style={{ cursor: 'pointer' }}
                 >
                   <a
