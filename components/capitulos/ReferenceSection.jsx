@@ -1,5 +1,5 @@
 import React from 'react';
-//renderiza as referências de cada capítulo
+//renderiza as referências de cada capítulo -> no momento não está sendo utilizado
 const ReferenceSection = ({ references, RefconvertToHTML }) => {
   return (
     <div className="references-section">

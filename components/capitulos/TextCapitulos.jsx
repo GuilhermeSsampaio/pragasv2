@@ -2,10 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import TableOfContents from './TableOfContents';
 import { convertToHTML } from '../utils/HtmlConverter'
 import ChapterContent from './ChapterContent';
-let i = 0;
 
+//componente responsável por montar a estrutura dos capítulos e a navegação entre eles
 const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId}) => {
-  // console.log('idtextbb', contentId)
   
   const [headerBlocks, setHeaderBlocks] = useState([]);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-
+//componente que renderiza o conteúdo dos capítulos passando os dados para o convertToHTML
 const ChapterContent = ({ cap, activeTitle, convertToHTML, contentId }) => {
   // console.log('contentId', contentId);
 
