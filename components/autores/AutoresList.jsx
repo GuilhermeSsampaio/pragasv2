@@ -1,5 +1,5 @@
 import CardAutor from "./CardAutor.jsx";
-
+//componente que renderiza a lista de autores passando os dados para o CardAutor
 const AutoresList = ({ data }) => {
   return (
     <div className="main-container-cards container-cards">
