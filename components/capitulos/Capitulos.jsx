@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import TextCapitulos from './TextCapitulos.jsx';
-import { useSidebar } from '../../hooks/useSidebar';
 import Link from 'next/link.js';
 import CapitulosSidebar from './SidebarCapitulos.jsx';
 import Navbar from '../navbar/Navbar.jsx';
