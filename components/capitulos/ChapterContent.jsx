@@ -8,13 +8,13 @@ const ChapterContent = ({ cap, activeTitle, convertToHTML, contentId }) => {
       {activeTitle === cap.id && (
         <>
           <h1>{cap.attributes.title}</h1>
-          <div className='center-textArticle'>{cap.attributes.subtitle}</div>
+          <div className='center-textArticle font-italic'>{cap.attributes.subtitle}</div>
 
           
           {cap.attributes.conteudo.find(item => item.id === contentId) && ( // Verifica se o conteúdo com o contentId existe
             <div className="bd-content ps-lg-2">
               {/* <div>{cap.attributes.conteudo.find(item => item.id === contentId).id}</div> */}
-              <div className='center-textArticle'>{cap.attributes.conteudo.find(item => item.id === contentId).titulo_secao}</div>
+              <div className='center-textArticle' style={{ fontStyle: 'italic' }}>{cap.attributes.conteudo.find(item => item.id === contentId).titulo_secao}</div>
               <div dangerouslySetInnerHTML={{ __html: convertToHTML(JSON.parse(cap.attributes.conteudo.find(item => item.id === contentId).texto_conteudo)) }} />
             </div>
           )}
