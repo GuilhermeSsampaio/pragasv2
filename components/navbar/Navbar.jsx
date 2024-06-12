@@ -68,8 +68,7 @@ const Navbar = ({ isOffcanvasOpen, handleToggleBackDrop, closeSidebar, handleTit
                   className="d-flex rounded-pill position-relative first-form-search"
                   role="search"
                 >
-                  <div className="search-bar-container p-1">
-
+                  <div className="search-bar-container p-1">                   
                     <SearchBar setResults={setResults} />
                     {results && results.length > 0 && (
                       <SearchResultsList
