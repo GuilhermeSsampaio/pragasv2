@@ -1,19 +1,21 @@
 import Link from 'next/link';
-import { SearchResult } from './SearchResult';
+import { SearchResult } from "./SearchResult";
 
-export const SearchResultsList = ({ searchResults, handleResultClick }) => {
+export const SearchResultsList = ({ results, handleCloseResults  }) => {
+  const mappedResults = results.map(item => ({
+    ...item,
+    chapterId: item.id // Supondo que o id seja equivalente ao chapterId
+  }));
+
+  const handleResultClick = () => {
+    handleCloseResults();
+  };
+
   return (
-    <div className="results-list">
-      {searchResults.map((result) => (
-        <Link
-          className="result-link"
-          href={`/sumario?activeChapter=${result.chapterId}#capitulo_${result.subchapterId}`}
-          key={result.subchapterId}
-          passHref
-        >
-          <div onClick={() => handleResultClick(result.chapterId, result.subchapterId)}>
-            <SearchResult result={result} />
-          </div>
+    <div className="results-list" onClick={handleResultClick}>
+      {mappedResults.map((result, id) => (
+        <Link className='result-link' href={`/sumario?activeChapter=${result.chapterId}#capitulo_${result.chapterId}`} key={id} passHref>
+          <SearchResult result={result} />
         </Link>
       ))}
     </div>

@@ -31,15 +31,14 @@ export const useSearch = (data) => {
   }, [searchTerm, data]);
 
   const handleResultClick = (chapterId, subchapterId) => {
-    const href = `/sumario?activeChapter=${chapterId}&activeSubChapter=${subchapterId}`;
-    const as = `/sumario?activeChapter=${chapterId}#capitulo_${subchapterId}`;
-    router.push(href, as, { shallow: true });
-  
+    // Limpar o termo de pesquisa e os resultados
     setSearchTerm('');
     setSearchResults([]);
+
+    // Navegar para o capítulo e subcapítulo
+    router.push(`/sumario?activeChapter=${chapterId}#capitulo_${subchapterId}`, undefined, { shallow: true });
   };
-  
-  
+
   return {
     searchTerm,
     searchResults,

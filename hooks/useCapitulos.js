@@ -44,6 +44,7 @@ export const useCapitulos = () => {
   const handleSubchapterClick = (e, chapterId, subchapterId) => {
     e.preventDefault();
     setActiveSubchapter(subchapterId);
+    localStorage
     if (!expandedItems.includes(chapterId)) {
       toggleItem(chapterId);
     }
