@@ -1,18 +1,9 @@
 export const SearchResult = ({ result }) => {
-  // Verifica se result e result.attributes estão definidos
-  if (!result || !result.attributes) {
-    return null; // Retorna null se não estiverem definidos
-  }
-
+  
   // Mapeia cada item de conteúdo para um componente SearchResult
   return (
     <div className="search-result">
-      {result.attributes.conteudo.map((conteudoItem, index) => (
-        <div key={index}>
-          {/* Renderize o link para o subcapítulo */}
-            {conteudoItem.titulo_secao}
-        </div>
-      ))}
+        {result.titulo_secao}
     </div>
   );
 };
