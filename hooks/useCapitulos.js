@@ -124,6 +124,15 @@ export const useCapitulos = () => {
   const activeChapter = data.find(item => item.id === activeTitle);
   const displayedTitle = activeChapter ? activeChapter.attributes.title : 'Título do Capítulo';
 
+  const handleToggleMainNavbar = () => {
+    const mainNavbarOptionsMenu = document.getElementById('main-navbar-options-menu');
+    const summary = document.getElementById('summary');
+
+    if (mainNavbarOptionsMenu && summary) {
+        mainNavbarOptionsMenu.style.display = 'block';
+        summary.style.display = 'none';
+    }
+};
   return {
     data,
     CarregaCapitulos,
@@ -149,5 +158,7 @@ export const useCapitulos = () => {
     toggleSummaryAndMainMenu,
     handleToggleBackDrop,
     displayedTitle,
+    handleToggleMainNavbar,
+    isCollapsed
   };
 };

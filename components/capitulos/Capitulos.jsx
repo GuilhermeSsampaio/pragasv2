@@ -34,7 +34,8 @@ const {
   activeSubchapter,
   toggleSummaryAndMainMenu,
   handleToggleBackDrop,
-  displayedTitle
+  displayedTitle,
+  handleToggleMainNavbar
 
 } = useCapitulos();
 
@@ -62,6 +63,7 @@ const {
         // activeTitle={activeTitle}
         toggleItem={toggleItem}
         toggleSummaryAndMainMenu={toggleSummaryAndMainMenu}
+        handleToggleMainNavbar = {handleToggleMainNavbar}
       />
 
         {/* Código Navbar  esta aqui pq se tirar buga -- corrigir*/} 
