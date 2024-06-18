@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import TableOfContents from './TableOfContents';
 import { convertToHTML } from '../utils/HtmlConverter'
 import ChapterContent from './ChapterContent';
+import SearchComponent from '../search/SearchComponent';
 
 //componente responsável por montar a estrutura dos capítulos e a navegação entre eles
-const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId}) => {
+const TextCapitulos = ({ lista, activeTitle, setActiveTitle}) => {
   
   const [headerBlocks, setHeaderBlocks] = useState([]);
+  const [contentId, setContentId] = useState(null);
 
   useEffect(() => {
     const extractedHeaderBlocks = [];
@@ -24,7 +26,10 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId}) => {
 
     setHeaderBlocks(extractedHeaderBlocks);
   }, [lista]);
-
+  const handleResultClick = (cap, item) => {
+    setActiveTitle(cap.id);
+    setContentId(item.id);
+  }
 
   const currentIndex = lista.findIndex((cap) => cap.id === activeTitle);
   const prevChapter = lista[currentIndex - 1];
@@ -45,6 +50,8 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId}) => {
     <>
       <div className="text-with-toc">
         <div className="text-content">
+        <SearchComponent lista={lista} onResultClick={handleResultClick} /> {/* Passa a função como prop */}
+
         {lista.map((cap) => (
           <ChapterContent 
             key={cap.id}

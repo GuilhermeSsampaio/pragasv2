@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SearchBar } from '../search/SearchBar';
-import { SearchResultsList } from '../search/SearchResultsList';
+import SearchComponent from '../search/SearchComponent';
 import Logo from '../../public/logo.png'
 
-const Navbar = ({ isOffcanvasOpen, handleToggleBackDrop, closeSidebar, handleTitleClick }) => {
-  const [results, setResults] = useState([]);
+const Navbar = ({ 
+  isOffcanvasOpen, handleToggleBackDrop, closeSidebar, home,
+  lista, activeTitle, setActiveTitle, contentId, setContentd // Novas props
+}) => {  const [results, setResults] = useState([]);
   const LogoIF = require("../../public/ifms-dr-marca-2015.png");
   const LogoEmbrapa = require("../../public/logo-embrapa-400.png");
 
@@ -69,14 +70,12 @@ const Navbar = ({ isOffcanvasOpen, handleToggleBackDrop, closeSidebar, handleTit
                   role="search"
                 >
                   <div className="search-bar-container p-1">                   
-                    <SearchBar setResults={setResults} />
-                    {results && results.length > 0 && (
-                      <SearchResultsList
-                        results={results}
-                        handleCloseResults={handleCloseResults}
-                      />
-
-                    )}
+                  <SearchComponent
+      lista={lista}
+      activeTitle={activeTitle}
+      setActiveTitle={setActiveTitle}
+      contentId={contentId}
+    />
                   </div>
                 </form>
               </div>
@@ -109,13 +108,12 @@ const Navbar = ({ isOffcanvasOpen, handleToggleBackDrop, closeSidebar, handleTit
               >
                 <div className="input-group hide-form-search">
                   <div className="search-bar-container">
-                    <SearchBar setResults={setResults} />
-                    {results && results.length > 0 && (
-                      <SearchResultsList
-                        results={results}
-                        handleCloseResults={handleCloseResults}
-                      />
-                    )}
+                  <SearchComponent
+      lista={lista}
+      activeTitle={activeTitle}
+      setActiveTitle={setActiveTitle}
+      contentId={contentId}
+    />
                   </div>
                 </div>
               </form>
