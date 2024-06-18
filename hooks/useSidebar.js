@@ -50,6 +50,7 @@ export const useSidebar = () => {
     isCollapsed,
     isOffcanvasOpen,
     expandedItems,
+    setExpandedItems,
     showSummary,
     toggleItem,
     handleToggle,

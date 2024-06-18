@@ -1,10 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function CapitulosSidebar({ data, isOffcanvasOpen, setIsOffcanvasOpen, closeSidebar, showSummary, setShowSummary, expandedItems, activeSubchapter, handleChapterClick, handleTitleClick,
-  handleSubchapterClick, toggleItem}) {
-
+export default function CapitulosSidebar({
+  data,
+  isOffcanvasOpen,
+  setIsOffcanvasOpen,
+  closeSidebar,
+  showSummary,
+  setShowSummary,
+  expandedItems,
+  setExpandedItems, // added to allow updating expandedItems from parent
+  activeSubchapter,
+  handleChapterClick,
+  handleTitleClick,
+  handleSubchapterClick,
+}) {
   var LogoIF = require("../../public/ifms-dr-marca-2015.png");
   var LogoEmbrapa = require("../../public/logo-embrapa-400.png");
   var LogoIFEmbrapa = require("../../public/logo-if-embrapa.png");
@@ -15,45 +26,54 @@ export default function CapitulosSidebar({ data, isOffcanvasOpen, setIsOffcanvas
     setIsOffcanvasOpen(!isOffcanvasOpen);
   };
 
-      //Função para quando o usuário clicar no botão "← Voltar para o menu principal"
-      const handleToggleMainNavbar = () => {
-        console.log('handleToggleMainNavbar');
-        const mainNavbarOptionsMenu = document.getElementById('main-navbar-options-menu');
-        const summary = document.getElementById('summary');
+  const handleToggleMainNavbar = () => {
+    console.log('handleToggleMainNavbar');
+    const mainNavbarOptionsMenu = document.getElementById('main-navbar-options-menu');
+    const summary = document.getElementById('summary');
 
-        if (mainNavbarOptionsMenu && summary) {
-            mainNavbarOptionsMenu.style.display = 'block';
-            summary.style.display = 'none';
-        }
-    };
-    const toggleSummaryAndMainMenu = () => {
-      setShowSummary(!showSummary);
-    };
-  
-    //useEffect para quando o usuário quiser fechar ou abrir os itens dentro do sumário do sidebar
-    useEffect(() => {
-      const anchorElement = document.getElementById('collapseExample1');
+    if (mainNavbarOptionsMenu && summary) {
+      mainNavbarOptionsMenu.style.display = 'block';
+      summary.style.display = 'none';
+    }
+  };
 
-      if (anchorElement) {
-          if (isCollapsed) {
-              anchorElement.classList.add('collapse');
-          } else {
-              anchorElement.classList.remove('collapse');
-          }
+  const toggleSummaryAndMainMenu = () => {
+    setShowSummary(!showSummary);
+  };
+
+  const toggleItem = (item) => {
+    if (expandedItems.includes(item)) {
+      setExpandedItems(expandedItems.filter(i => i !== item));
+    } else {
+      const isSummary = item === 'summary';
+
+      setExpandedItems(isSummary ? [item, ...expandedItems] : ['summary', item]);
+    }
+  };
+
+  useEffect(() => {
+    const anchorElement = document.getElementById('collapseExample1');
+
+    if (anchorElement) {
+      if (isCollapsed) {
+        anchorElement.classList.add('collapse');
+      } else {
+        anchorElement.classList.remove('collapse');
       }
+    }
 
-      const backButton = document.getElementById('back-button');
-      backButton.addEventListener('click', handleToggleMainNavbar);
+    const backButton = document.getElementById('back-button');
+    backButton.addEventListener('click', handleToggleMainNavbar);
 
-      return () => {
-          backButton.removeEventListener('click', handleToggleMainNavbar);
-      };
+    return () => {
+      backButton.removeEventListener('click', handleToggleMainNavbar);
+    };
   }, [isCollapsed]);
+
   return (
     <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white thin-scrollbar ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
       <div className="position-sticky">
         <div id="summary" className="list-group list-group-flush mt-2 py-2 menu_SIkG" style={{ display: showSummary ? 'block' : 'none' }}>
-          {/* Logo IF / Embrapa Dentro do Menu */}
           <div className='logo-container-fixed'>
             <div className="logo-container d-flex align-items-center justify-content-between">
               <Link href="/home">
@@ -63,9 +83,7 @@ export default function CapitulosSidebar({ data, isOffcanvasOpen, setIsOffcanvas
             </div>
           </div>
           <hr className="featurette-divider line-menu"></hr>
-          {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
           <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={() => { setShowSummary(false); }}>← Voltar para o menu principal</button>
-          {/* Dropdown do Sumário */}
           {data.length > 0 ? (
             <div>
               <a
@@ -81,7 +99,7 @@ export default function CapitulosSidebar({ data, isOffcanvasOpen, setIsOffcanvas
                   <div key={item.id}>
                     <a
                       className={`list-group-item list-group-item-action py-2 ${expandedItems.includes(item.id) ? 'active' : ''}`}
-                      onClick={() => handleChapterClick(item.id)}
+                      onClick={() => toggleItem(item.id)}
                       style={{ cursor: 'pointer' }}
                     >
                       <div className="d-flex justify-content-between align-items-center">
@@ -126,7 +144,6 @@ export default function CapitulosSidebar({ data, isOffcanvasOpen, setIsOffcanvas
           )}
         </div>
       </div>
-      {/* Opções Retornadas quando o Usuário Aperta no Botão "← Voltar para o menu principal" */}
       <div id='main-navbar-options-menu' style={{ marginTop: 16, display: showSummary ? 'none' : 'block' }}>
         <div className="logo-container d-flex align-items-center justify-content-between">
           <Link href="/home">

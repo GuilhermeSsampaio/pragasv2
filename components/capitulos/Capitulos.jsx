@@ -31,6 +31,7 @@ const {
   setShowSummary,
   toggleItem,
   expandedItems,
+  setExpandedItems,
   activeSubchapter,
   toggleSummaryAndMainMenu,
   handleToggleBackDrop,
@@ -56,6 +57,7 @@ const {
         showSummary={showSummary}
         setShowSummary={setShowSummary}
         expandedItems={expandedItems}
+        setExpandedItems={setExpandedItems}
         activeSubchapter={activeSubchapter}
         handleChapterClick={handleChapterClick}
         handleTitleClick={handleTitleClick}
