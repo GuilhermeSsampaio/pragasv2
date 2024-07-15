@@ -52,6 +52,8 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId, setCont
       {
       //dentro desse navbar ai quando manda a lista buga o sidebar, os cap clicados não fecham o sidebar  
       // se remove o parametro da lista, a pesquisa para de funcionar mas o sidebar volta ao normal
+
+      //ps: corrigi mas vou deixar pra lembrar 
       }
       <div className="text-with-toc">
         <div className="text-content">

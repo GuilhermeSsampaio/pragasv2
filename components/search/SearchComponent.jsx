@@ -48,9 +48,10 @@ const SearchComponent = ({ lista, onResultClick }) => {
   };
 
   return (
-    <div className="search-component" ref={searchContainerRef}>
+    <div className="input-wrapper" ref={searchContainerRef}>
+      <i id="search-icon" className="fas fa-search"></i>
       <input
-        type="text"
+        className="navbar-input"
         placeholder="Pesquisar por título da seção"
         value={searchTerm}
         onChange={handleSearchChange}

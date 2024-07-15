@@ -1,10 +1,12 @@
+import React from 'react';
 import Link from 'next/link';
-import { SearchResult } from "./SearchResult";
+import SearchResult from './SearchResult'; // Importar o componente de resultado
 
-export const SearchResultsList = ({ results, handleCloseResults }) => {
-  const mappedResults = results.map(item => ({
+const SearchResultsList = ({ results, handleCloseResults }) => {
+  const mappedResults = results.map(({ cap, item }) => ({
     ...item,
-    chapterId: item.id // Supondo que o id seja equivalente ao chapterId
+    chapterId: cap.id,
+    chapterTitle: cap.attributes.title,
   }));
 
   const handleResultClick = () => {
@@ -14,12 +16,17 @@ export const SearchResultsList = ({ results, handleCloseResults }) => {
   return (
     <div className="results-list" onClick={handleResultClick}>
       {mappedResults.map((result, index) => (
-        result && result.id && (
-          <Link className='result-link' href={`/sumario?activeChapter=${result.chapterId}#capitulo_${result.chapterId}`} key={index} passHref>
-            <SearchResult result={result} />
-          </Link>
-        )
+        <Link
+          className="result-link"
+          // href={`/sumario?activeChapter=${result.chapterId}#capitulo_${result.chapterId}`}
+          key={index}
+          passHref
+        >
+          <SearchResult result={result} />
+        </Link>
       ))}
     </div>
   );
 };
+
+export default SearchResultsList;
