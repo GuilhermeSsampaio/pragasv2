@@ -40,6 +40,7 @@ export const useCapitulos = () => {
     console.log("handleTitleClick");
     setActiveTitle(titleId);
     localStorage.setItem("activeChapter", titleId.toString()); // Armazena o ID no localStorage
+    closeSidebar()
   };
 
   const handleSubchapterClick = (e, chapterId, subchapterId) => {

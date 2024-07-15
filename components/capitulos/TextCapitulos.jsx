@@ -3,6 +3,7 @@ import TableOfContents from './TableOfContents';
 import { convertToHTML } from '../utils/HtmlConverter'
 import ChapterContent from './ChapterContent';
 import Navbar from '../navbar/Navbar'
+import { useCapitulos } from '../../hooks/useCapitulos';
 //componente responsável por montar a estrutura dos capítulos e a navegação entre eles
 const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId, setContentId}) => {
   
@@ -44,9 +45,14 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle , contentId, setCont
     });
   };
 
+
   return (
     <>
-      <Navbar lista={lista} handleResultClick={handleResultClick}/>
+      <Navbar handleResultClick={handleResultClick} lista={lista}/> 
+      {
+      //dentro desse navbar ai quando manda a lista buga o sidebar, os cap clicados não fecham o sidebar  
+      // se remove o parametro da lista, a pesquisa para de funcionar mas o sidebar volta ao normal
+      }
       <div className="text-with-toc">
         <div className="text-content">
         {lista.map((cap) => (
