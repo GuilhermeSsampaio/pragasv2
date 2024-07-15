@@ -16,6 +16,7 @@ const {
   setActiveTitle,
   results,
   clickedSectionId,
+  setClickedSectionId,
   handleCloseResults,
   loadContent,
   handleTitleClick,
@@ -119,7 +120,7 @@ const {
               >
                 {/* Código dos Textos da Cartilha */}
                 <div id="contents" className="bd-content ps-lg-2">
-                <TextCapitulos lista={data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} contentId={clickedSectionId} />
+                <TextCapitulos lista={data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} contentId={clickedSectionId} setContentId={setClickedSectionId} />
 
                 </div>
               </section>

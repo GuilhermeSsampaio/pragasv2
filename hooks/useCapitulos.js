@@ -90,7 +90,7 @@ export const useCapitulos = () => {
   }, [query]);
 
   const CarregaCapitulos = async () => {
-    const url = 'https://api-cartilha-teste.onrender.com/api/pragas?populate=*';
+    const url = 'https://api-cartilha-teste2.onrender.com/api/pragas?populate=*';
 
     try {
       const response = await fetch(url);
@@ -141,6 +141,7 @@ export const useCapitulos = () => {
     setActiveTitle,
     results,
     clickedSectionId,
+    setClickedSectionId,
     handleCloseResults,
     loadContent,
     handleTitleClick,

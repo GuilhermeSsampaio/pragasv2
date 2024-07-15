@@ -7,11 +7,16 @@ import Logo from '../../public/logo.png'
 
 const Navbar = ({ 
   isOffcanvasOpen, handleToggleBackDrop, closeSidebar, home,
-  lista, activeTitle, setActiveTitle, contentId, setContentd // Novas props
+  lista, activeTitle, setActiveTitle, contentId, setContentId, handleResultClick// Novas props
 }) => {  const [results, setResults] = useState([]);
   const LogoIF = require("../../public/ifms-dr-marca-2015.png");
   const LogoEmbrapa = require("../../public/logo-embrapa-400.png");
-
+  // const [contentId, setContentId] = useState(null);
+  
+  // const handleResultClick = (cap, item) => {
+  //   setActiveTitle(cap.id);
+  //   setContentId(item.id);
+  // }
   const handleCloseResults = () => {
     setResults([]);
   };
@@ -70,12 +75,8 @@ const Navbar = ({
                   role="search"
                 >
                   <div className="search-bar-container p-1">                   
-                  <SearchComponent
-      lista={lista}
-      activeTitle={activeTitle}
-      setActiveTitle={setActiveTitle}
-      contentId={contentId}
-    />
+                  <SearchComponent lista={lista} onResultClick={handleResultClick} /> {/* Passa a função como prop */}
+
                   </div>
                 </form>
               </div>
@@ -108,12 +109,8 @@ const Navbar = ({
               >
                 <div className="input-group hide-form-search">
                   <div className="search-bar-container">
-                  <SearchComponent
-      lista={lista}
-      activeTitle={activeTitle}
-      setActiveTitle={setActiveTitle}
-      contentId={contentId}
-    />
+                  <SearchComponent lista={lista} onResultClick={handleResultClick} /> {/* Passa a função como prop */}
+
                   </div>
                 </div>
               </form>
