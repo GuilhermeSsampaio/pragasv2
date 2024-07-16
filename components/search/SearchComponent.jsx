@@ -58,16 +58,16 @@ const SearchComponent = ({ lista, onResultClick }) => {
         onChange={handleSearchChange}
       />
       {showResults && (
-        <ul className="search-results">
+        <div className="results-list">
           {searchResults.map(({ cap, item }) => (
             // <li key={item.id} onClick={() => handleResultClick(cap, item)}>
             //   {item.titulo_secao} ({cap.attributes.title})
             // </li>
             <div className="search-result-item" key={item.id} onClick={() => handleResultClick(cap, item)}>
-                {item.titulo_secao} ({cap.attributes.title})
+               <p className='result-link'> {item.titulo_secao} ({cap.attributes.title})</p>
             </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
