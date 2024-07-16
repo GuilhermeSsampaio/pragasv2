@@ -40,6 +40,10 @@ const {
   handleToggleMainNavbar
 
 } = useCapitulos();
+const handleResultClick = (cap, item) => {
+  setActiveTitle(cap.id);
+  setClickedSectionId(item.id);
+}
 
   return (
     <>
@@ -73,7 +77,8 @@ const {
         <Navbar 
           isOffcanvasOpen={isOffcanvasOpen}
           handleToggleBackDrop={handleToggleBackDrop}
-          
+          handleResultClick={handleResultClick}
+          lista={data}
         />
         {/* Conteúdo do Manual */}
         <main className="docMainContainer_gTbr">

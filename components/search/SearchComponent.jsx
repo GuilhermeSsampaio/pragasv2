@@ -45,6 +45,7 @@ const SearchComponent = ({ lista, onResultClick }) => {
   const handleResultClick = (cap, item) => {
     onResultClick(cap, item); // Chama a função passada como prop
     setShowResults(false);
+    setSearchTerm('')
   };
 
   return (
@@ -59,9 +60,12 @@ const SearchComponent = ({ lista, onResultClick }) => {
       {showResults && (
         <ul className="search-results">
           {searchResults.map(({ cap, item }) => (
-            <li key={item.id} onClick={() => handleResultClick(cap, item)}>
-              {item.titulo_secao} ({cap.attributes.title})
-            </li>
+            // <li key={item.id} onClick={() => handleResultClick(cap, item)}>
+            //   {item.titulo_secao} ({cap.attributes.title})
+            // </li>
+            <div className="search-result-item" key={item.id} onClick={() => handleResultClick(cap, item)}>
+                {item.titulo_secao} ({cap.attributes.title})
+            </div>
           ))}
         </ul>
       )}
