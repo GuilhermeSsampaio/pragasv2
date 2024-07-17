@@ -22,7 +22,7 @@ const SearchComponent = ({ lista, onResultClick }) => {
     }
 
     setSearchResults(results);
-    setShowResults(true); 
+    setShowResults(results.length > 0); // Mostra os resultados apenas se houver algum
   }, [searchTerm, lista]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const SearchComponent = ({ lista, onResultClick }) => {
   const handleResultClick = (cap, item) => {
     onResultClick(cap, item); // Chama a função passada como prop
     setShowResults(false);
-    setSearchTerm('')
+    setSearchTerm('');
   };
 
   return (
@@ -53,18 +53,15 @@ const SearchComponent = ({ lista, onResultClick }) => {
       <i id="search-icon" className="fas fa-search"></i>
       <input
         className="navbar-input"
-        placeholder="Pesquisar por título da seção"
+        placeholder="Pesquisar título da seção"
         value={searchTerm}
         onChange={handleSearchChange}
       />
       {showResults && (
         <div className="results-list">
           {searchResults.map(({ cap, item }) => (
-            // <li key={item.id} onClick={() => handleResultClick(cap, item)}>
-            //   {item.titulo_secao} ({cap.attributes.title})
-            // </li>
             <div className="search-result-item" key={item.id} onClick={() => handleResultClick(cap, item)}>
-               <p className='result-link'> {item.titulo_secao} ({cap.attributes.title})</p>
+              <p className='result-link'>{item.titulo_secao} ({cap.attributes.title})</p>
             </div>
           ))}
         </div>

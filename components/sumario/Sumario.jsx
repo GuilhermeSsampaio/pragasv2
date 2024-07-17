@@ -273,7 +273,7 @@ export const Sumario = () => {
               {data.length > 0 ? (
                 <div>
                   <a
-                    className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple`}
+                    className="list-group-item list-group-item-action d-flex justify-content-between align-items-center dropdown-background"
                     aria-current="true"
                     onClick={() => toggleItem("summary")}
                   >

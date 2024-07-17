@@ -44,7 +44,7 @@ hr {
 
 .nav-item .nav-link {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #1c1e21;
 }
 
@@ -81,7 +81,7 @@ hr {
 }
 
 .logotipo {
-    margin-left: 1rem;
+    margin-left: .6rem;
 }
 
 .navbar-toggler {
@@ -161,7 +161,6 @@ hr {
     background-color: #ebedf0;
     color: #444950;
     border: none;
-    height: 100%;
     font-size: .9rem;
     cursor: text;
     width: 100%;
@@ -547,6 +546,9 @@ footer .container-footer {
         display: none !important;
     }
     /* Estilo Navbar */
+    .navbar {
+        padding: 0 !important;
+    }
     .navbar-brand {
         margin-left: 15px;
     }
@@ -649,7 +651,7 @@ footer .container-footer {
     }
     /* Estilo do Input Search Navbar para Tela Menor que 992px */
     .input-wrapper {
-        width: 200px !important;
+        width: 230px !important;
     }
     /* Estilo dos Botões do Primeiro Conteúdo da Página */
     .container-botoes .btn {
@@ -663,7 +665,7 @@ footer .container-footer {
 @media (max-width: 290px) {
     /* Estilo do Input Search Navbar para Tela Menor que 992px */
     .input-wrapper {
-        width: 150px !important;
+        width: 200px !important;
     }
     .hero {
         display: block;

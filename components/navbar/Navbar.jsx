@@ -22,7 +22,7 @@ const Navbar = ({
   };
 
   return (
-<nav
+        <nav
           id="main-navbar"
           className="navbar navbar-expand-lg navbar-light bg-white fixed-top"
         >

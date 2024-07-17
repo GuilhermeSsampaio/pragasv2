@@ -19,7 +19,7 @@ export const HomePage = () => {
         <>
             <Head>
                 <meta name="referrer" referrerPolicy="no-referrer" />
-                <title>Manual Pragas</title>
+                <title>Manual de Identificação | Embrapa</title>
             </Head>
                         {/* Código Navbar Offcanvas */}
 

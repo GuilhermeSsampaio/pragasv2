@@ -45,10 +45,10 @@ export const Autores = () => {
   return (
     <>
       <Head>
-        <title>Autores</title>
+        <title>Manual de Identificação | Embrapa</title>
       </Head>
 {/* Código Navbar Offcanvas */}
-<nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top" aria-label="Offcanvas navbar large">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top" aria-label="Offcanvas navbar large">
                 <div className="container-fluid">
                     <div className="d-flex align-items-center">
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">

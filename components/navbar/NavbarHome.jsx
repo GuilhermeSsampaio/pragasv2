@@ -1,12 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
-import { SearchBar } from "../search/SearchBar"
-import { SearchResultsList } from "../search/SearchResultsList"
+import SearchComponent from '../search/SearchComponent';
 import Logo from '../../public/logo.png'
 import { useState } from 'react'
 import { useSidebar } from "../../hooks/useSidebar"
 
-export default function NavbareHome() {
+export default function NavbareHome({ lista, handleResultClick }) {
     var LogoIF = require('../../public/ifms-dr-marca-2015.png');
     var LogoEmbrapa = require('../../public/logo-embrapa-400.png');
     var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
@@ -29,10 +28,9 @@ export default function NavbareHome() {
                     </div>
                     {/* Input Search para tela menor que 992px */}
                     <div className="search-container first-form-search p-1">
-                        <div className="search-bar-container">
-                            <SearchBar setResults={setResults} />
-                            {results && results.length > 0 && <SearchResultsList results={results} handleCloseResults={handleCloseResults} />}
-                        </div>
+                        <div className="search-bar-container p-1">                   
+                            <SearchComponent lista={lista} onResultClick={handleResultClick} /> {/* Passa a função como prop */}
+                         </div>
                     </div>
 
                     {/* Código dos Itens Exibidos no Navbar */}
@@ -64,10 +62,9 @@ export default function NavbareHome() {
                                 </li>
                             </ul>
                             {/* Input Search para tela maior que 992px */}
-                            <div id="searchForm" className="search-container">
-                                <div className="d-flex position-relative p-1 search-bar-container">
-                                    <SearchBar setResults={setResults} />
-                                    {results && results.length > 0 && <SearchResultsList results={results}  handleCloseResults={handleCloseResults}/>}
+                            <div id="searchForm" className="search-container p-1">
+                                <div className="search-bar-container p-1">                   
+                                    <SearchComponent lista={lista} onResultClick={handleResultClick} /> {/* Passa a função como prop */}
                                 </div>
                             </div>
                             <ul className="navbar-nav d-flex links-logo flex-row">

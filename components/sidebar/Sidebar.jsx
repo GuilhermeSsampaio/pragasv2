@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SumarioDropdown from '../capitulos/SumarioDropDown';
-const Sidebar = ({ data, isOffcanvasOpen,setIsOffcanvasOpen, closeSidebar, setShowSummary, showSummary, expandedItems, toggleItem, activeTitle, setActiveTitle, handleSubitemContent, scrollToTop, toggleSummaryAndMainMenu }) => {
+const Sidebar = ({ data, isOffcanvasOpen, setIsOffcanvasOpen, closeSidebar, setShowSummary, showSummary, expandedItems, toggleItem, activeTitle, setActiveTitle, handleSubitemContent, scrollToTop, toggleSummaryAndMainMenu }) => {
   var LogoIFEmbrapa = require('../../public/logo-if-embrapa.png');
 
     return (
@@ -25,12 +25,12 @@ const Sidebar = ({ data, isOffcanvasOpen,setIsOffcanvasOpen, closeSidebar, setSh
                     {data.length > 0 ? (
                         <div>
                             <a
-                            className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple`}
-                            aria-current="true"
-                            onClick={() => toggleItem('summary')}
+                                className="list-group-item list-group-item-action d-flex justify-content-between align-items-center dropdown-background"
+                                aria-current="true"
+                                onClick={() => toggleItem('summary')}
                             >
-                            <span className="w-100 text-primary">Sumário</span>
-                            <i className={`fas fa-chevron-${expandedItems.includes('summary') ? 'down' : 'right'} icon-deg`}></i>
+                                <span className="w-100 text-primary">Sumário</span>
+                                <i className={`fas fa-chevron-${expandedItems.includes('summary') ? 'down' : 'right'} icon-deg`}></i>
                             </a>
                             <SumarioDropdown
                                 data={data}

@@ -49,7 +49,7 @@ const handleResultClick = (cap, item) => {
     <>
       <Head>
         <meta name="referrer" referrerPolicy="no-referrer" />
-        <title>TecnofamApp</title>
+        <title>Manual de Identificação | Embrapa</title>
       </Head>
 
       <div className="container-wrapper">
