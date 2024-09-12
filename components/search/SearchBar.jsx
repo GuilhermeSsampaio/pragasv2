@@ -6,7 +6,7 @@ export const SearchBar = ({ setResults }) => {
   const [showNoResultsMessage, setShowNoResultsMessage] = useState(false);
 
   const fetchData = (value) => {
-    fetch("https://api-cartilha-teste.onrender.com/api/pragas?populate=*")
+    fetch("https://api-cartilha.squareweb.app/api/pragas?populate=*")
       .then((response) => response.json())
       .then((data) => {
         const results = data.data.filter((capitulo) => {
@@ -14,11 +14,13 @@ export const SearchBar = ({ setResults }) => {
             value &&
             capitulo.attributes &&
             capitulo.attributes.title &&
-            capitulo.attributes.title.toLowerCase().includes(value.toLowerCase())
+            capitulo.attributes.title
+              .toLowerCase()
+              .includes(value.toLowerCase())
           );
         });
         setResults(results);
-        setShowNoResultsMessage(results.length === 0 && value.trim() !== ""); 
+        setShowNoResultsMessage(results.length === 0 && value.trim() !== "");
       })
       .catch((error) => {
         console.error("Erro ao buscar dados:", error);
@@ -55,7 +57,13 @@ export const SearchBar = ({ setResults }) => {
         value={input}
         onChange={(e) => handleChange(e.target.value)}
       />
-      {showNoResultsMessage && <div className="results-list"><p className='result-nulo'>Nenhum resultado encontrado para "{input}".</p></div>}
+      {showNoResultsMessage && (
+        <div className="results-list">
+          <p className="result-nulo">
+            Nenhum resultado encontrado para "{input}".
+          </p>
+        </div>
+      )}
     </div>
   );
 };

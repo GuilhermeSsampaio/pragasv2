@@ -1,50 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
-import TextCapitulos from './TextCapitulos.jsx';
-import Link from 'next/link.js';
-import CapitulosSidebar from './SidebarCapitulos.jsx';
-import Navbar from '../navbar/Navbar.jsx';
-import { useCapitulos } from '../../hooks/useCapitulos';
+import React, { useEffect, useState } from "react";
+import Head from "next/head";
+import TextCapitulos from "./TextCapitulos.jsx";
+import Link from "next/link.js";
+import CapitulosSidebar from "./SidebarCapitulos.jsx";
+import Navbar from "../navbar/Navbar.jsx";
+import { useCapitulos } from "../../hooks/useCapitulos";
 
 //componente principal de capítulos que renderiza a barra lateral e o conteúdo do capítulo
 
 export const Capitulos = () => {
-  
-const {
-  data,
-  activeTitle,
-  setActiveTitle,
-  results,
-  clickedSectionId,
-  setClickedSectionId,
-  handleCloseResults,
-  loadContent,
-  handleTitleClick,
-  handleSubchapterClick,
-  urlRouter,
-  closeSidebar,
-  handleChapterClick,
-  scrollToTop,
-  handleSubitemContent,
-  isOffcanvasOpen,
-  setIsOffcanvasOpen,
-  showSummary,
-  setShowSummary,
-  toggleItem,
-  expandedItems,
-  setExpandedItems,
-  activeSubchapter,
-  toggleSummaryAndMainMenu,
-  handleToggleBackDrop,
-  displayedTitle,
-  handleToggleMainNavbar
-
-} = useCapitulos();
-const handleResultClick = (cap, item) => {
-  setActiveTitle(cap.id);
-  setClickedSectionId(item.id);
-}
-
+  const {
+    data,
+    activeTitle,
+    setActiveTitle,
+    results,
+    clickedSectionId,
+    setClickedSectionId,
+    handleCloseResults,
+    loadContent,
+    handleTitleClick,
+    handleSubchapterClick,
+    urlRouter,
+    closeSidebar,
+    handleChapterClick,
+    scrollToTop,
+    handleSubitemContent,
+    isOffcanvasOpen,
+    setIsOffcanvasOpen,
+    showSummary,
+    setShowSummary,
+    toggleItem,
+    expandedItems,
+    setExpandedItems,
+    activeSubchapter,
+    toggleSummaryAndMainMenu,
+    handleToggleBackDrop,
+    displayedTitle,
+    handleToggleMainNavbar,
+  } = useCapitulos();
+  const handleResultClick = (cap, item) => {
+    setActiveTitle(cap.id);
+    setClickedSectionId(item.id);
+  };
+  // console.log(data);
   return (
     <>
       <Head>
@@ -55,26 +53,26 @@ const handleResultClick = (cap, item) => {
       <div className="container-wrapper">
         {/* Código Sidebar */}
         <CapitulosSidebar
-        data={data}
-        isOffcanvasOpen={isOffcanvasOpen}
-        setIsOffcanvasOpen={setIsOffcanvasOpen}
-        closeSidebar={closeSidebar}
-        showSummary={showSummary}
-        setShowSummary={setShowSummary}
-        expandedItems={expandedItems}
-        setExpandedItems={setExpandedItems}
-        activeSubchapter={activeSubchapter}
-        handleChapterClick={handleChapterClick}
-        handleTitleClick={handleTitleClick}
-        handleSubchapterClick={handleSubchapterClick}
-        // activeTitle={activeTitle}
-        toggleItem={toggleItem}
-        toggleSummaryAndMainMenu={toggleSummaryAndMainMenu}
-        handleToggleMainNavbar = {handleToggleMainNavbar}
-      />
+          data={data}
+          isOffcanvasOpen={isOffcanvasOpen}
+          setIsOffcanvasOpen={setIsOffcanvasOpen}
+          closeSidebar={closeSidebar}
+          showSummary={showSummary}
+          setShowSummary={setShowSummary}
+          expandedItems={expandedItems}
+          setExpandedItems={setExpandedItems}
+          activeSubchapter={activeSubchapter}
+          handleChapterClick={handleChapterClick}
+          handleTitleClick={handleTitleClick}
+          handleSubchapterClick={handleSubchapterClick}
+          // activeTitle={activeTitle}
+          toggleItem={toggleItem}
+          toggleSummaryAndMainMenu={toggleSummaryAndMainMenu}
+          handleToggleMainNavbar={handleToggleMainNavbar}
+        />
 
-        {/* Código Navbar  esta aqui pq se tirar buga -- corrigir*/} 
-        <Navbar 
+        {/* Código Navbar  esta aqui pq se tirar buga -- corrigir*/}
+        <Navbar
           isOffcanvasOpen={isOffcanvasOpen}
           handleToggleBackDrop={handleToggleBackDrop}
           handleResultClick={handleResultClick}
@@ -125,15 +123,19 @@ const handleResultClick = (cap, item) => {
               >
                 {/* Código dos Textos da Cartilha */}
                 <div id="contents" className="bd-content ps-lg-2">
-                <TextCapitulos lista={data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} contentId={clickedSectionId} setContentId={setClickedSectionId} />
-
+                  <TextCapitulos
+                    lista={data}
+                    activeTitle={activeTitle}
+                    setActiveTitle={setActiveTitle}
+                    contentId={clickedSectionId}
+                    setContentId={setClickedSectionId}
+                  />
                 </div>
               </section>
             </div>
           </div>
         </main>
       </div>
-
     </>
   );
 };

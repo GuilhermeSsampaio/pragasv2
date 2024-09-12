@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useSidebar } from './useSidebar';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSidebar } from "./useSidebar";
 
 export const useCapitulos = () => {
   const [data, setData] = useState([]);
@@ -23,7 +23,7 @@ export const useCapitulos = () => {
     handleToggleBackDrop,
     toggleSummaryAndMainMenu,
     setIsOffcanvasOpen,
-    setShowSummary
+    setShowSummary,
   } = useSidebar();
 
   const handleCloseResults = () => {
@@ -40,13 +40,13 @@ export const useCapitulos = () => {
     console.log("handleTitleClick");
     setActiveTitle(titleId);
     localStorage.setItem("activeChapter", titleId.toString()); // Armazena o ID no localStorage
-    closeSidebar()
+    closeSidebar();
   };
 
   const handleSubchapterClick = (e, chapterId, subchapterId) => {
     e.preventDefault();
     setActiveSubchapter(subchapterId);
-    localStorage
+    localStorage;
     if (!expandedItems.includes(chapterId)) {
       toggleItem(chapterId);
     }
@@ -62,7 +62,9 @@ export const useCapitulos = () => {
     setActiveTitle(itemId);
     toggleItem(itemId);
     scrollToTop();
-    router.push(`/sumario?activeChapter=${itemId}`, undefined, { shallow: true });
+    router.push(`/sumario?activeChapter=${itemId}`, undefined, {
+      shallow: true,
+    });
   };
 
   const scrollToTop = () => {
@@ -84,14 +86,16 @@ export const useCapitulos = () => {
   }, []);
 
   useEffect(() => {
-    const queryChapterId = query.activeChapter ? parseInt(query.activeChapter, 10) : null;
+    const queryChapterId = query.activeChapter
+      ? parseInt(query.activeChapter, 10)
+      : null;
     if (queryChapterId !== null) {
       setActiveTitle(queryChapterId);
     }
   }, [query]);
 
   const CarregaCapitulos = async () => {
-    const url = 'https://api-cartilha-teste2.onrender.com/api/pragas?populate=*';
+    const url = "https://api-cartilha.squareweb.app/api/pragas?populate=*";
 
     try {
       const response = await fetch(url);
@@ -99,15 +103,18 @@ export const useCapitulos = () => {
         const json = await response.json();
         const data = json.data;
         setData(data);
-
-        const queryChapterId = query.activeChapter ? parseInt(query.activeChapter, 10) : null;
+        const queryChapterId = query.activeChapter
+          ? parseInt(query.activeChapter, 10)
+          : null;
         if (queryChapterId !== null) {
           setActiveTitle(queryChapterId);
         } else if (data.length > 0) {
           setActiveTitle(data[0].id);
         }
       } else {
-        throw new Error('Falha na requisição. Código de status: ' + response.status);
+        throw new Error(
+          "Falha na requisição. Código de status: " + response.status
+        );
       }
     } catch (error) {
       console.error(error);
@@ -123,18 +130,22 @@ export const useCapitulos = () => {
     setIsOffcanvasOpen(false);
   };
 
-  const activeChapter = data.find(item => item.id === activeTitle);
-  const displayedTitle = activeChapter ? activeChapter.attributes.title : 'Título do Capítulo';
+  const activeChapter = data.find((item) => item.id === activeTitle);
+  const displayedTitle = activeChapter
+    ? activeChapter.attributes.title
+    : "Título do Capítulo";
 
   const handleToggleMainNavbar = () => {
-    const mainNavbarOptionsMenu = document.getElementById('main-navbar-options-menu');
-    const summary = document.getElementById('summary');
+    const mainNavbarOptionsMenu = document.getElementById(
+      "main-navbar-options-menu"
+    );
+    const summary = document.getElementById("summary");
 
     if (mainNavbarOptionsMenu && summary) {
-        mainNavbarOptionsMenu.style.display = 'block';
-        summary.style.display = 'none';
+      mainNavbarOptionsMenu.style.display = "block";
+      summary.style.display = "none";
     }
-};
+  };
   return {
     data,
     CarregaCapitulos,
@@ -163,6 +174,6 @@ export const useCapitulos = () => {
     handleToggleBackDrop,
     displayedTitle,
     handleToggleMainNavbar,
-    isCollapsed
+    isCollapsed,
   };
 };
