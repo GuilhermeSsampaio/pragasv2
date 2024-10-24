@@ -5,7 +5,7 @@ const SearchComponent = ({ lista, onResultClick }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
   const searchContainerRef = useRef(null);
-
+  // console.log("SearchComponent", lista);
   useEffect(() => {
     const results = [];
 
@@ -13,8 +13,8 @@ const SearchComponent = ({ lista, onResultClick }) => {
       lista.forEach((cap) => {
         cap.attributes.conteudo.forEach((item) => {
           if (
-            item.titulo_secao &&
-            item.titulo_secao.toLowerCase().includes(searchTerm.toLowerCase())
+            item.titulo_subcap &&
+            item.titulo_subcap.toLowerCase().includes(searchTerm.toLowerCase())
           ) {
             results.push({ cap, item });
           }
@@ -70,7 +70,7 @@ const SearchComponent = ({ lista, onResultClick }) => {
               onClick={() => handleResultClick(cap, item)}
             >
               <p className="result-link">
-                {item.titulo_secao} ({cap.attributes.title})
+                {item.titulo_subcap} ({cap.attributes.title})
               </p>
             </div>
           ))}
