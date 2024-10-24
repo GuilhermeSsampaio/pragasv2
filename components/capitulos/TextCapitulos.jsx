@@ -82,11 +82,11 @@ const TextCapitulos = ({
           ))}
         </div>
         <div className="table-of-contents">
-          <TableOfContents
+          {/* <TableOfContents
             key={activeTitle}
             headerBlocks={headerBlocks}
             activeTitle={activeTitle}
-          />
+          /> */}
         </div>
       </div>
       <nav
