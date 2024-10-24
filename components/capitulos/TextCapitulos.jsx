@@ -81,20 +81,20 @@ const TextCapitulos = ({
             />
           ))}
         </div>
-        <div className="table-of-contents">
-          {/* <TableOfContents
+        {/* <div className="table-of-contents">
+          <TableOfContents
             key={activeTitle}
             headerBlocks={headerBlocks}
             activeTitle={activeTitle}
-          /> */}
-        </div>
+          />
+        </div> */}
       </div>
       <nav
         className="pagination-nav docusaurus-mt-lg"
         aria-label="Páginas de documentação"
         style={{ zIndex: 99999 }}
       >
-        {prevChapter && (
+        {/* {prevChapter && (
           <button
             className="pagination-nav__link pagination-nav__link--prev"
             onClick={() => handleNavigation(prevChapter.id)}
@@ -104,8 +104,8 @@ const TextCapitulos = ({
               {prevChapter.attributes.title}
             </div>
           </button>
-        )}
-        {nextChapter && (
+        )} */}
+        {/* {nextChapter && (
           <button
             className="pagination-nav__link pagination-nav__link--next"
             onClick={() => handleNavigation(nextChapter.id)}
@@ -115,7 +115,7 @@ const TextCapitulos = ({
               {nextChapter.attributes.title}
             </div>
           </button>
-        )}
+        )} */}
       </nav>
     </>
   );

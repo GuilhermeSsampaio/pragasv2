@@ -38,11 +38,21 @@ export const Capitulos = () => {
     displayedTitle,
     handleToggleMainNavbar,
   } = useCapitulos();
+
+  // Defina o estado inicial de activeTitle e expandedItems para incluir o ID do capítulo 1
+  useEffect(() => {
+    if (data.length > 0) {
+      const firstChapterId = data[0].id;
+      setActiveTitle(firstChapterId);
+      setExpandedItems(["summary", firstChapterId]);
+    }
+  }, [data, setActiveTitle, setExpandedItems]);
+
   const handleResultClick = (cap, item) => {
     setActiveTitle(cap.id);
     setClickedSectionId(item.id);
   };
-  // console.log(data);
+
   return (
     <>
       <Head>
@@ -65,7 +75,6 @@ export const Capitulos = () => {
           handleChapterClick={handleChapterClick}
           handleTitleClick={handleTitleClick}
           handleSubchapterClick={handleSubchapterClick}
-          // activeTitle={activeTitle}
           toggleItem={toggleItem}
           toggleSummaryAndMainMenu={toggleSummaryAndMainMenu}
           handleToggleMainNavbar={handleToggleMainNavbar}
