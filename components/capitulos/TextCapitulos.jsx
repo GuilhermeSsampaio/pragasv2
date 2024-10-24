@@ -82,7 +82,11 @@ const TextCapitulos = ({
           ))}
         </div>
         <div className="table-of-contents">
-          <TableOfContents key={activeTitle} headerBlocks={headerBlocks} />
+          <TableOfContents
+            key={activeTitle}
+            headerBlocks={headerBlocks}
+            activeTitle={activeTitle}
+          />
         </div>
       </div>
       <nav
@@ -90,7 +94,7 @@ const TextCapitulos = ({
         aria-label="Páginas de documentação"
         style={{ zIndex: 99999 }}
       >
-        {/* {prevChapter && (
+        {prevChapter && (
           <button
             className="pagination-nav__link pagination-nav__link--prev"
             onClick={() => handleNavigation(prevChapter.id)}
@@ -111,7 +115,7 @@ const TextCapitulos = ({
               {nextChapter.attributes.title}
             </div>
           </button>
-        )} */}
+        )}
       </nav>
     </>
   );
