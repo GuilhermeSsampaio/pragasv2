@@ -144,74 +144,78 @@ export default function CapitulosSidebar({
                   expandedItems.includes("summary") ? "show" : "collapse"
                 }`}
               >
-                {data.map((item, chapterIndex) => (
-                  <div key={item.id}>
-                    <a
-                      className={`list-group-item list-group-item-action py-2 ${
-                        expandedItems.includes(item.id) ? "active" : ""
-                      }`}
-                      onClick={() => toggleItem(item.id)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div>
-                          <h6 className="mb-0">{item.attributes.title}</h6>
-                          {item.attributes.subtitle && (
-                            <span className="subtitle font-size-lg">
-                              {item.attributes.subtitle}
-                            </span>
-                          )}
+                {data
+                  .sort((a, b) => a.id - b.id) // Ordena os capítulos pelo ID de forma crescente
+                  .map((item, chapterIndex) => (
+                    <div key={item.id}>
+                      <a
+                        className={`list-group-item list-group-item-action py-2 ${
+                          expandedItems.includes(item.id) ? "active" : ""
+                        }`}
+                        onClick={() => toggleItem(item.id)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h6 className="mb-0">{item.attributes.title}</h6>
+                            {item.attributes.subtitle && (
+                              <span className="subtitle font-size-lg">
+                                {item.attributes.subtitle}
+                              </span>
+                            )}
+                          </div>
+                          <i
+                            className={`fas fa-chevron-${
+                              expandedItems.includes(item.id) ? "down" : "right"
+                            } ml-2`}
+                            style={{ fontSize: "15px" }}
+                          ></i>
                         </div>
-                        <i
-                          className={`fas fa-chevron-${
-                            expandedItems.includes(item.id) ? "down" : "right"
-                          } ml-2`}
-                          style={{ fontSize: "15px" }}
-                        ></i>
-                      </div>
-                    </a>
+                      </a>
 
-                    {expandedItems.includes(item.id) && (
-                      <ul className="list-group list-group-flush mx-2 py-1">
-                        {item.attributes.conteudo.map((conteudoItem, index) => (
-                          <li
-                            key={conteudoItem.id}
-                            className={`list-group-item py-2 ${
-                              activeSubchapter === conteudoItem.id
-                                ? "active"
-                                : ""
-                            }`}
-                            onClick={() => {
-                              handleTitleClick(item.id);
-                              setIsOffcanvasOpen(false);
-                            }}
-                            style={{ cursor: "pointer" }}
-                          >
-                            <a
-                              data-conteudo-index={index}
-                              data-chapter-index={chapterIndex}
-                              href={`#capitulo_${conteudoItem.id}`}
-                              className={
-                                activeSubchapter === conteudoItem.id
-                                  ? "active-link-summary"
-                                  : ""
-                              }
-                              onClick={(e) =>
-                                handleSubchapterClick(
-                                  e,
-                                  item.id,
-                                  conteudoItem.id
-                                )
-                              }
-                            >
-                              {conteudoItem.titulo_subcap}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
+                      {expandedItems.includes(item.id) && (
+                        <ul className="list-group list-group-flush mx-2 py-1">
+                          {item.attributes.conteudo.map(
+                            (conteudoItem, index) => (
+                              <li
+                                key={conteudoItem.id}
+                                className={`list-group-item py-2 ${
+                                  activeSubchapter === conteudoItem.id
+                                    ? "active"
+                                    : ""
+                                }`}
+                                onClick={() => {
+                                  handleTitleClick(item.id);
+                                  setIsOffcanvasOpen(false);
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <a
+                                  data-conteudo-index={index}
+                                  data-chapter-index={chapterIndex}
+                                  href={`#capitulo_${conteudoItem.id}`}
+                                  className={
+                                    activeSubchapter === conteudoItem.id
+                                      ? "active-link-summary"
+                                      : ""
+                                  }
+                                  onClick={(e) =>
+                                    handleSubchapterClick(
+                                      e,
+                                      item.id,
+                                      conteudoItem.id
+                                    )
+                                  }
+                                >
+                                  {conteudoItem.titulo_subcap}
+                                </a>
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
               </div>
             </div>
           ) : (

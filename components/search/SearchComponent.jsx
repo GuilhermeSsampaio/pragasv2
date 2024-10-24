@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 const SearchComponent = ({ lista, onResultClick }) => {
   const [searchResults, setSearchResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
   const searchContainerRef = useRef(null);
 
   useEffect(() => {
     const results = [];
 
-    if (Array.isArray(lista) && searchTerm.length > 0) { 
+    if (Array.isArray(lista) && searchTerm.length > 0) {
       lista.forEach((cap) => {
         cap.attributes.conteudo.forEach((item) => {
           if (
+            item.titulo_secao &&
             item.titulo_secao.toLowerCase().includes(searchTerm.toLowerCase())
           ) {
             results.push({ cap, item });
@@ -27,14 +28,17 @@ const SearchComponent = ({ lista, onResultClick }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
-        setShowResults(false); 
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target)
+      ) {
+        setShowResults(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [searchContainerRef]);
 
@@ -45,7 +49,7 @@ const SearchComponent = ({ lista, onResultClick }) => {
   const handleResultClick = (cap, item) => {
     onResultClick(cap, item); // Chama a função passada como prop
     setShowResults(false);
-    setSearchTerm('');
+    setSearchTerm("");
   };
 
   return (
@@ -60,8 +64,14 @@ const SearchComponent = ({ lista, onResultClick }) => {
       {showResults && (
         <div className="results-list">
           {searchResults.map(({ cap, item }) => (
-            <div className="search-result-item" key={item.id} onClick={() => handleResultClick(cap, item)}>
-              <p className='result-link'>{item.titulo_secao} ({cap.attributes.title})</p>
+            <div
+              className="search-result-item"
+              key={item.id}
+              onClick={() => handleResultClick(cap, item)}
+            >
+              <p className="result-link">
+                {item.titulo_secao} ({cap.attributes.title})
+              </p>
             </div>
           ))}
         </div>
